@@ -127,7 +127,6 @@ img {
 }
 
 main {
-  min-height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
   justify-content: center;
