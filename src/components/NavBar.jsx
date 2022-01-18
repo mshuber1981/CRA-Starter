@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { FaBars, FaReact } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import NavLinksMain from "./NavLinksMain";
+import NavLinksRoute from "./NavLinksRoute";
+import { links } from "../data";
 
 const StyledNavBar = styled.nav`
   display: flex;
@@ -53,13 +57,10 @@ const StyledNavBar = styled.nav`
       }
 
       .nav-links {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        text-align: center;
-        width: 50%;
-        margin: 0 auto;
+        display: flex;
+        justify-content: space-evenly;
 
-        .link-btn {
+        .link {
           font-size: 1.1rem;
           text-transform: capitalize;
           letter-spacing: 1px;
@@ -72,6 +73,8 @@ const StyledNavBar = styled.nav`
 `;
 
 export default function NavBar() {
+  const { pathname } = useLocation();
+
   return (
     <StyledNavBar>
       <div className="nav-center">
@@ -82,21 +85,11 @@ export default function NavBar() {
           </button>
         </div>
         <ul className="nav-links">
-          <li>
-            <a href="#" className="link-btn">
-              Section 1
-            </a>
-          </li>
-          <li>
-            <a href="#" className="link-btn">
-              Section 2
-            </a>
-          </li>
-          <li>
-            <a href="#" className="link-btn">
-              Section 3
-            </a>
-          </li>
+          {pathname === "/" ? (
+            <NavLinksMain links={links} />
+          ) : (
+            <NavLinksRoute />
+          )}
         </ul>
       </div>
     </StyledNavBar>
