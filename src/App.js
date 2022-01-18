@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./components/GlobalStyles";
 // Pages
 import Home from "./pages/Home";
+import Route1Example from "./pages/Route1Example";
 
 const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const themes = {
@@ -39,6 +40,7 @@ function App() {
         <GlobalStyles />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/Route-1" element={<Route1Example />} />
           {/* <Route path="*" element={<Error />} /> */}
         </Routes>
       </ThemeProvider>
