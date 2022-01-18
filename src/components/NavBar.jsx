@@ -6,12 +6,13 @@ import NavLinksRoute from "./NavLinksRoute";
 import { links } from "../data";
 
 const StyledNavBar = styled.nav`
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   height: var(--nav-height);
+  width: 100%;
   background: var(--primary);
-  position: relative;
   z-index: 1;
 
   .nav-center {
