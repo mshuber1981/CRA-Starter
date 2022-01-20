@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-scroll";
+import { FaChevronCircleDown } from "react-icons/fa";
 
-// Image
+// Media
 import Logo from "../media/logo.svg";
 
 const StyledHero = styled.header`
@@ -43,6 +45,15 @@ const StyledHero = styled.header`
     }
   }
 
+  .down {
+    font-size: 2.5rem;
+    transition: var(--transition);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
   @media screen and (min-width: 800px) {
     .hero-center {
       grid-template-columns: repeat(2, 1fr);
@@ -61,10 +72,15 @@ const StyledHero = styled.header`
         justify-self: center;
       }
     }
+
+    .down {
+      font-size: 3rem;
+    }
   }
 `;
 
-export default function Hero() {
+export default function Hero({ section1 }) {
+  console.log(section1);
   return (
     <StyledHero>
       <div className="hero-center">
@@ -75,10 +91,13 @@ export default function Hero() {
             Template
           </h1>
         </article>
-        <article class="hero-images">
-          <img src={Logo} alt="React Logo" class="hero-img" />
+        <article className="hero-images">
+          <img src={Logo} alt="React Logo" className="hero-img" />
         </article>
       </div>
+      <Link to={section1} smooth={true} offset={-80}>
+        <FaChevronCircleDown className="down" />
+      </Link>
     </StyledHero>
   );
 }

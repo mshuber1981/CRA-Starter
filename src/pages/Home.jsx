@@ -1,18 +1,25 @@
-import { FixedNavSpacer } from "../components/globalStyledComponents";
+import { Element } from "react-scroll";
+// Components
 import NavBar from "../components/NavBar";
+import { FixedNavSpacer } from "../components/globalStyledComponents";
 import Hero from "../components/Hero";
+import { Section1, Section2, Section3 } from "../components/HomeSections";
+import Footer from "../components/Footer";
 
-export default function Home() {
+export default function Home({ home }) {
   return (
     <>
-      <NavBar />
+      <NavBar pageLinks={home.links} />
       <FixedNavSpacer />
-      <Hero />
+      <Element name={home.links[0].to}>
+        <Hero section1={home.links[1].to} />
+      </Element>
       <main>
-        <section className="section section-center">
-          <h2>h2</h2>
-        </section>
+        <Section1 section1={home.links[1]} />
+        <Section2 section2={home.links[2]} />
+        <Section3 section3={home.links[3]} />
       </main>
+      <Footer />
     </>
   );
 }

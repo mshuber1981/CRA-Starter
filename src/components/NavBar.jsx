@@ -1,18 +1,20 @@
 import styled from "styled-components";
-import { FaBars, FaReact } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
-import NavLinksMain from "./NavLinksMain";
-import NavLinksRoute from "./NavLinksRoute";
-import { links } from "../data";
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+// Icons
+import { FaBars } from "react-icons/fa";
+// Data
+import { Logo } from "../data";
 
 const StyledNavBar = styled.nav`
   position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   height: var(--nav-height);
   width: 100%;
-  background: var(--primary);
+  background: transparent;
   z-index: 1;
 
   .nav-center {
@@ -24,21 +26,27 @@ const StyledNavBar = styled.nav`
       justify-content: space-between;
       align-items: center;
 
+      .nav-logo,
+      .toggle-btn {
+        font-size: 1.75rem;
+      }
+
       .nav-logo {
-        font-size: 1.5rem;
-        color: ${({ theme }) =>
-          theme.name === "light" ? "var(--light)" : "var(--dark)"};
+        height: calc(var(--nav-height) - 1rem);
       }
 
       .toggle-btn {
-        font-size: 1.5rem;
         line-height: 0;
         border-color: transparent;
         background: transparent;
         cursor: pointer;
         transition: var(--transition);
         color: ${({ theme }) =>
-          theme.name === "light" ? "var(--light)" : "var(--dark)"};
+          theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+        &:hover {
+          color: var(--primary);
+        }
       }
     }
 
@@ -48,6 +56,11 @@ const StyledNavBar = styled.nav`
   }
 
   @media screen and (min-width: 800px) {
+    background: ${({ theme }) =>
+      theme.name === "light"
+        ? "rgba(0, 0, 0, 0.1)"
+        : "rgba(255, 255, 255, 0.1)"};
+
     .nav-center {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -65,32 +78,57 @@ const StyledNavBar = styled.nav`
           font-size: 1.1rem;
           text-transform: capitalize;
           letter-spacing: 1px;
+          cursor: pointer;
+          transition: var(--transition);
           color: ${({ theme }) =>
-            theme.name === "light" ? "var(--light)" : "var(--dark)"};
+            theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+          &:hover {
+            color: var(--primary);
+          }
+        }
+
+        .active {
+          color: var(--active);
         }
       }
     }
   }
 `;
 
-export default function NavBar() {
-  const { pathname } = useLocation();
-
+export default function NavBar({ pageLinks }) {
   return (
     <StyledNavBar>
       <div className="nav-center">
         <div className="nav-header">
-          <FaReact className="nav-logo" />
+          <img src={Logo} alt="Navigation Logo" className="nav-logo" />
           <button className="toggle-btn">
             <FaBars />
           </button>
         </div>
         <ul className="nav-links">
-          {pathname === "/" ? (
-            <NavLinksMain links={links} />
-          ) : (
-            <NavLinksRoute />
-          )}
+          {pageLinks.map(function ({ id, name, to }) {
+            return (
+              <li key={id}>
+                {to.startsWith("/") ? (
+                  <Link to={to} className="link">
+                    {name}
+                  </Link>
+                ) : (
+                  <ScrollLink
+                    to={to}
+                    offset={-80}
+                    smooth={true}
+                    spy={true}
+                    activeClass="active"
+                    className="link"
+                  >
+                    {name}
+                  </ScrollLink>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </StyledNavBar>

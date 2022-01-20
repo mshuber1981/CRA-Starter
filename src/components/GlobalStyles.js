@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { active } from "../data";
 
 const GlobalStyles = createGlobalStyle`
 /*
@@ -15,6 +16,7 @@ Variables
   --dark: #27272A;
   --white: #fff;
   --black: #222;
+  --active: ${() => (active ? active : "orangered")};
   --max-width: 1170px;
   --nav-height: 3.5rem;
   --spacing: 0.1rem;
@@ -105,7 +107,7 @@ p {
   }
 }
 
-img {
+img:not(.nav-logo) {
   width: 100%;
   display: block;
 }
