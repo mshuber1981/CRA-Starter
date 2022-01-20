@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
+// https://v5.reactrouter.com/web/guides/scroll-restoration
 export default function ScrollToTop() {
   const { pathname } = useLocation();
 
