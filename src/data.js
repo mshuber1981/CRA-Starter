@@ -12,34 +12,6 @@ export const active = "";
 /**
  * NavBar/Sidbar pages and links
  */
-// export const links = [
-//   {
-//     ID: "1",
-//     name: "Home",
-//     link: "Home",
-//   },
-//   {
-//     ID: "2",
-//     name: "Section 1",
-//     link: "Section-1",
-//   },
-//   {
-//     ID: "3",
-//     name: "Section 2",
-//     link: "Section-2",
-//   },
-//   {
-//     ID: "4",
-//     name: "Section 3",
-//     link: "Section-3",
-//   },
-//   {
-//     ID: "5",
-//     name: "Route Example",
-//     link: "/Route-1",
-//   },
-// ];
-
 export const links = [
   {
     page: "Home",
