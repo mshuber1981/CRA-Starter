@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
-// Icons
-import { FaBars } from "react-icons/fa";
+import { Link as ScrollLink, Element } from "react-scroll";
 // Data
 import { Logo } from "../data";
+// Icons
+import { FaBars } from "react-icons/fa";
+// Components
+import { FixedNavSpacer } from "../components/globalStyledComponents";
 
 const StyledNavBar = styled.nav`
   position: fixed;
@@ -98,39 +100,44 @@ const StyledNavBar = styled.nav`
 
 export default function NavBar({ pageLinks }) {
   return (
-    <StyledNavBar>
-      <div className="nav-center">
-        <div className="nav-header">
-          <img src={Logo} alt="Navigation Logo" className="nav-logo" />
-          <button className="toggle-btn">
-            <FaBars />
-          </button>
+    <>
+      <Element name={pageLinks[0].to}>
+        <FixedNavSpacer />
+      </Element>
+      <StyledNavBar>
+        <div className="nav-center">
+          <div className="nav-header">
+            <img src={Logo} alt="Navigation Logo" className="nav-logo" />
+            <button className="toggle-btn">
+              <FaBars />
+            </button>
+          </div>
+          <ul className="nav-links">
+            {pageLinks.map(function ({ id, name, to }, index) {
+              return (
+                <li key={id}>
+                  {to.startsWith("/") ? (
+                    <Link to={to} className="link">
+                      {name}
+                    </Link>
+                  ) : (
+                    <ScrollLink
+                      to={to}
+                      offset={index === 0 ? 0 : -80}
+                      smooth={true}
+                      spy={true}
+                      activeClass="active"
+                      className="link"
+                    >
+                      {name}
+                    </ScrollLink>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className="nav-links">
-          {pageLinks.map(function ({ id, name, to }) {
-            return (
-              <li key={id}>
-                {to.startsWith("/") ? (
-                  <Link to={to} className="link">
-                    {name}
-                  </Link>
-                ) : (
-                  <ScrollLink
-                    to={to}
-                    offset={-80}
-                    smooth={true}
-                    spy={true}
-                    activeClass="active"
-                    className="link"
-                  >
-                    {name}
-                  </ScrollLink>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </StyledNavBar>
+      </StyledNavBar>
+    </>
   );
 }
