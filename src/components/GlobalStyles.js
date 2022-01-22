@@ -19,6 +19,7 @@ Variables
   --active: ${() => (active ? active : "orangered")};
   --max-width: 1170px;
   --nav-height: 3.5rem;
+  --min-footer-height: 10vh;
   --spacing: 0.1rem;
   --radius: 0.25rem;
   --transition: all 0.3s linear;
@@ -127,6 +128,42 @@ img:not(.nav-logo) {
     width: 95vw;
   }
 }
+
+.up {
+    position: fixed;
+    bottom: calc(var(--min-footer-height) + 1.5rem);
+    right: 1.5rem;
+    visibility: hidden;
+    /* z-index: -1; */
+  }
+
+  .show-up {
+    visibility: visible;
+    /* z-index: 1; */
+  }
+
+.down,
+  .up {
+    font-size: 2.5rem;
+    line-height: 0;
+    transition: var(--transition);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .down,
+    .up {
+      font-size: 3rem;
+    }
+
+    .up {
+      bottom: calc(var(--min-footer-height) + 4rem);
+    right: 4rem;
+    }
+  }
 `;
 
 export default GlobalStyles;

@@ -5,7 +5,7 @@ const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 10vh;
+  min-height: var(--min-footer-height);
   background: var(--primary);
 
   svg {

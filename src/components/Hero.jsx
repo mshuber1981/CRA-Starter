@@ -45,15 +45,6 @@ const StyledHero = styled.header`
     }
   }
 
-  .down {
-    font-size: 2.5rem;
-    transition: var(--transition);
-
-    &:hover {
-      color: var(--primary);
-    }
-  }
-
   @media screen and (min-width: 800px) {
     .hero-center {
       grid-template-columns: repeat(2, 1fr);
@@ -80,7 +71,6 @@ const StyledHero = styled.header`
 `;
 
 export default function Hero({ section1 }) {
-  console.log(section1);
   return (
     <StyledHero>
       <div className="hero-center">
