@@ -8,11 +8,13 @@ Variables
 ===============
 */
 :root {
+  /* Primary light */
+  --primary-light: #b0edfd;
   /* Primary Color */
   --primary: #61DBFB;
-  /* https://www.color-name.com/sport-white.color */
+  /* Primary dark */
+  --primary-dark: #316e7e;
   --light: #FBFDFF;
-  /* https://www.color-name.com/black-beauty.color */
   --dark: #27272A;
   --white: #fff;
   --black: #222;
