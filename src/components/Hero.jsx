@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
+// Icons
 import { FaChevronCircleDown } from "react-icons/fa";
-
 // Media
 import Logo from "../media/logo.svg";
+// Components
+import { Title } from "./globalStyledComponents";
 
 const StyledHero = styled.header`
   position: relative;
@@ -75,11 +77,7 @@ export default function Hero({ section1 }) {
     <StyledHero>
       <div className="hero-center">
         <article className="hero-info">
-          <h1>
-            CRA Starter
-            <br />
-            Template
-          </h1>
+          <Title />
         </article>
         <article className="hero-images">
           <img src={Logo} alt="React Logo" className="hero-img" />
