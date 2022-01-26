@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
+// Icons
+import { FaGithub } from "react-icons/fa";
 
 // Spacer for fixed Navigation bar
 export const FixedNavSpacer = styled.div`
@@ -49,5 +51,33 @@ export function Title({ heading, title }) {
     <>
       <StyledTitle ref={titleElement} />
     </>
+  );
+}
+
+// Footer
+const StyledFooter = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: var(--min-footer-height);
+  background: var(--primary);
+
+  svg {
+    font-size: 2rem;
+    color: ${({ theme }) =>
+      theme.name === "light" ? "var(--light)" : "var(--dark)"};
+
+    &:hover {
+      color: ${({ theme }) =>
+        theme.name === "light" ? "var(--dark)" : "var(--light)"};
+    }
+  }
+`;
+
+export function Footer() {
+  return (
+    <StyledFooter>
+      <FaGithub />
+    </StyledFooter>
   );
 }
