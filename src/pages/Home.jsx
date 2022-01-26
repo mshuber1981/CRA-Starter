@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import Hero from "../components/Hero";
 import { Section1, Section2, Section3 } from "../components/HomeSections";
 import { BackToTop } from "../components/BackToTop";
-import Footer from "../components/Footer";
+import { Footer } from "../components/globalStyledComponents";
 
 export default function Home({ home }) {
   return (
