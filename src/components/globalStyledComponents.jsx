@@ -1,12 +1,47 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-scroll";
 // Icons
 import { FaGithub } from "react-icons/fa";
+import { FaChevronCircleUp } from "react-icons/fa";
 
 // Spacer for fixed Navigation bar
 export const FixedNavSpacer = styled.div`
   height: var(--nav-height);
 `;
+
+// Back to top link
+export function BackToTop({ home }) {
+  const [scrollY, setScrollY] = useState("");
+  const up = useRef(null);
+
+  useEffect(
+    function () {
+      function updateScrollY() {
+        setScrollY(window.pageYOffset);
+
+        if (scrollY > 500) {
+          up.current.classList.add("show-up");
+        } else {
+          up.current.classList.remove("show-up");
+        }
+      }
+
+      window.addEventListener("scroll", updateScrollY);
+
+      return () => window.removeEventListener("scroll", updateScrollY);
+    },
+    [scrollY]
+  );
+
+  return (
+    <div className="up" ref={up}>
+      <Link to={home.links[0].to} offset={0} smooth={true}>
+        <FaChevronCircleUp />
+      </Link>
+    </div>
+  );
+}
 
 // Titles
 const StyledTitle = styled.div`
