@@ -1,9 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-scroll";
+import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
+import { Link as ScrollLink, Element } from "react-scroll";
+// Data
+import { Logo } from "../data";
 // Icons
-import { FaGithub } from "react-icons/fa";
-import { FaChevronCircleUp } from "react-icons/fa";
+import { FaBars, FaChevronCircleUp, FaGithub } from "react-icons/fa";
+
+// Animation
+export const Spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 // Spacer for fixed Navigation bar
 export const FixedNavSpacer = styled.div`
@@ -36,9 +48,9 @@ export function BackToTop({ home }) {
 
   return (
     <div className="up" ref={up}>
-      <Link to={home.links[0].to} offset={0} smooth={true}>
+      <ScrollLink to={home.links[0].to} offset={0} smooth={true}>
         <FaChevronCircleUp />
-      </Link>
+      </ScrollLink>
     </div>
   );
 }
@@ -77,7 +89,7 @@ export function Title({ heading, title }) {
       heading !== undefined && title !== undefined
         ? (titleElement.current.innerHTML = `<div class="container"><${heading}>${title}</${heading}><div class="underline" /></div>`)
         : (titleElement.current.innerHTML =
-            "<div class='container'><h1>Sample H1 Title</h1><div class='underline'/></div>");
+            "<div class='container'><h2>Sample H2 Title</h2><div class='underline'/></div>");
     },
     [heading, title]
   );
@@ -85,6 +97,151 @@ export function Title({ heading, title }) {
   return (
     <>
       <StyledTitle ref={titleElement} />
+    </>
+  );
+}
+
+// Navbar
+const StyledNavBar = styled.nav`
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--nav-height);
+  width: 100%;
+  background: transparent;
+  z-index: 1;
+
+  .nav-center {
+    width: 90vw;
+    max-width: var(--max-width);
+
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .toggle-btn,
+      .nav-logo {
+        background: ${({ theme }) =>
+          theme.name === "light" ? "var(--light)" : "var(--dark)"};
+      }
+
+      .nav-logo {
+        height: calc(var(--nav-height) - 1rem);
+        width: calc(var(--nav-height) - 1rem);
+        border-radius: 50%;
+      }
+
+      .toggle-btn {
+        font-size: 1.75rem;
+        line-height: 0;
+        border-color: transparent;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: var(--transition);
+        color: ${({ theme }) =>
+          theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+        &:hover {
+          color: var(--primary);
+        }
+      }
+    }
+
+    .nav-links {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    background: ${({ theme }) =>
+      theme.name === "light"
+        ? "rgba(0, 0, 0, 0.1)"
+        : "rgba(255, 255, 255, 0.1)"};
+
+    .nav-center {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+
+      .nav-header {
+        .nav-logo {
+          background: transparent;
+        }
+
+        .toggle-btn {
+          display: none;
+        }
+      }
+
+      .nav-links {
+        display: flex;
+        justify-content: space-evenly;
+
+        .link {
+          font-size: 1.1rem;
+          text-transform: capitalize;
+          letter-spacing: 1px;
+          cursor: pointer;
+          transition: var(--transition);
+          color: ${({ theme }) =>
+            theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+          &:hover {
+            color: var(--primary);
+          }
+        }
+
+        .active {
+          color: var(--active);
+        }
+      }
+    }
+  }
+`;
+
+export function NavBar({ pageLinks }) {
+  return (
+    <>
+      <Element name={pageLinks[0].to}>
+        <FixedNavSpacer />
+      </Element>
+      <StyledNavBar>
+        <div className="nav-center">
+          <div className="nav-header">
+            <img src={Logo} alt="Navigation Logo" className="nav-logo" />
+            <button className="toggle-btn">
+              <FaBars />
+            </button>
+          </div>
+          <ul className="nav-links">
+            {pageLinks.map(function ({ id, name, to }, index) {
+              return (
+                <li key={id}>
+                  {to.startsWith("/") ? (
+                    <Link to={to} className="link">
+                      {name}
+                    </Link>
+                  ) : (
+                    <ScrollLink
+                      to={to}
+                      offset={index === 0 ? 0 : -80}
+                      smooth={true}
+                      spy={true}
+                      activeClass="active"
+                      className="link"
+                    >
+                      {name}
+                    </ScrollLink>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </StyledNavBar>
     </>
   );
 }
