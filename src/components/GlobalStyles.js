@@ -148,7 +148,10 @@ img:not(.nav-logo) {
   .up {
     font-size: 2.5rem;
     line-height: 0;
+    border-radius: 50%;
     transition: var(--transition);
+    background: ${({ theme }) =>
+      theme.name === "light" ? "var(--light)" : "var(--dark)"};
 
     &:hover {
       color: var(--primary);
