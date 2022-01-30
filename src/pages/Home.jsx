@@ -1,8 +1,11 @@
 // Components
-import NavBar from "../components/NavBar";
 import Hero from "../components/Hero";
 import { Section1, Section2, Section3 } from "../components/HomeSections";
-import { BackToTop, Footer } from "../components/globalStyledComponents";
+import {
+  BackToTop,
+  Footer,
+  NavBar,
+} from "../components/globalStyledComponents";
 
 export default function Home({ home }) {
   return (

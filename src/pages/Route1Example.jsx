@@ -1,4 +1,5 @@
-import NavBar from "../components/NavBar";
+// import NavBar from "../components/NavBar";
+import { NavBar } from "../components/globalStyledComponents";
 
 export default function Route1Example({ route1 }) {
   return (
