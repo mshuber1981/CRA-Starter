@@ -21,7 +21,7 @@ export function Section2({ section2 }) {
   return (
     <StyledSection1 className="section section-center">
       <Element name={section2.to}>
-        <Title heading={"h2"} title={"Section 2"} />
+        <Title />
       </Element>
     </StyledSection1>
   );
