@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useGlobalContext } from "./context";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 // Data
@@ -25,14 +26,20 @@ const themes = {
 };
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const { setDark, setLight, theme } = useGlobalContext();
+  // https://stackoverflow.com/questions/56240067/accessing-context-from-useeffect
+  const setDarkTheme = useRef(setDark);
+  const setLightTheme = useRef(setLight);
 
-  useEffect(() => (darkMode ? setTheme("dark") : setTheme("light")), []);
+  useEffect(
+    () => (darkMode ? setDarkTheme.current() : setLightTheme.current()),
+    []
+  );
 
   window
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", (e) =>
-      e.matches ? setTheme("dark") : setTheme("light")
+      e.matches ? setDarkTheme.current() : setLightTheme.current()
     );
 
   return (
