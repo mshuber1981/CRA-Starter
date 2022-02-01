@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useGlobalContext } from "../context";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink, Element } from "react-scroll";
@@ -6,6 +7,7 @@ import { Link as ScrollLink, Element } from "react-scroll";
 import { Logo } from "../data";
 // Icons
 import { FaBars, FaChevronCircleUp, FaGithub } from "react-icons/fa";
+import { GiSunflower, GiMoon } from "react-icons/gi";
 
 // Animation
 export const Spin = keyframes`
@@ -101,6 +103,61 @@ export function Title({ heading, title }) {
   );
 }
 
+// Theme Toggle
+const StyledSwitch = styled.label`
+  /* Slider pill */
+  display: inline-flex;
+  align-items: center;
+  height: calc(var(--nav-height) - 1.5rem);
+  width: calc(var(--nav-height) + 0.5rem);
+  font-size: 1.9rem;
+  border-radius: 30px;
+  margin: 0.25rem;
+  transition: var(--transition);
+  border: 2px solid
+    ${({ theme }) => (theme.name === "light" ? "var(--dark)" : "var(--light)")};
+  color: ${({ theme }) =>
+    theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+  &:hover {
+    background: var(--primary);
+  }
+
+  /* Hide defualt checkbox */
+  input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+
+  /* Move span when checked */
+  input[type="checkbox"]:checked + div {
+    transform: translateX(100%);
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+  }
+`;
+
+export function ToggleSwitch() {
+  const { theme, toggleTheme } = useGlobalContext();
+
+  return (
+    <StyledSwitch className="toggle-theme">
+      <input
+        type="checkbox"
+        aria-label={`Toggle theme, currently ${theme}.`}
+        onClick={toggleTheme}
+      />
+      <div>{theme === "light" ? <GiSunflower /> : <GiMoon />}</div>
+    </StyledSwitch>
+  );
+}
+
 // Navbar
 const StyledNavBar = styled.nav`
   position: fixed;
@@ -153,6 +210,10 @@ const StyledNavBar = styled.nav`
     .nav-links {
       display: none;
     }
+
+    .toggle-theme {
+      display: none;
+    }
   }
 
   @media screen and (min-width: 800px) {
@@ -174,6 +235,10 @@ const StyledNavBar = styled.nav`
         .toggle-btn {
           display: none;
         }
+      }
+
+      .toggle-theme {
+        display: inline-flex;
       }
 
       .nav-links {
@@ -240,9 +305,54 @@ export function NavBar({ pageLinks }) {
               );
             })}
           </ul>
+          <ToggleSwitch />
         </div>
       </StyledNavBar>
     </>
+  );
+}
+
+// Sidebar
+const StyledSidebar = styled.aside`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  /* z-index: -999; */
+  z-index: 2;
+  transition: var(--transition);
+  transform: scale(0);
+  background: rgba(0, 0, 0, 0.5);
+
+  &.show {
+    visibility: visible;
+    z-index: 2;
+    transform: scale(1);
+  }
+
+  .sidebar {
+    width: 90vw;
+    height: 95vh;
+    max-width: var(--fixed-width);
+    background: var(--light);
+    border-radius: var(--radius);
+    /* box-shadow: var(--dark-shadow); */
+    position: relative;
+    padding: 4rem 2rem;
+  }
+`;
+
+export function Sidebar() {
+  return (
+    <StyledSidebar>
+      <aside className="sidebar">
+        <h1>test</h1>
+      </aside>
+    </StyledSidebar>
   );
 }
 
