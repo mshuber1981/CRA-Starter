@@ -131,6 +131,11 @@ img:not(.nav-logo) {
   }
 }
 
+/*
+=============== 
+Scroll Links
+===============
+*/
 .up {
     position: fixed;
     bottom: calc(var(--min-footer-height) + 1.5rem);
