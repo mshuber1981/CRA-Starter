@@ -8,6 +8,7 @@ import { Logo } from "../data";
 // Icons
 import { FaBars, FaChevronCircleUp, FaGithub } from "react-icons/fa";
 import { GiSunflower, GiMoon } from "react-icons/gi";
+import { IoMdCloseCircle } from "react-icons/io";
 
 // Animation
 export const Spin = keyframes`
@@ -268,6 +269,8 @@ const StyledNavBar = styled.nav`
 `;
 
 export function NavBar({ pageLinks }) {
+  const { openSidebar } = useGlobalContext();
+
   return (
     <>
       <Element name={pageLinks[0].to}>
@@ -277,7 +280,7 @@ export function NavBar({ pageLinks }) {
         <div className="nav-center">
           <div className="nav-header">
             <img src={Logo} alt="Navigation Logo" className="nav-logo" />
-            <button className="toggle-btn">
+            <button className="toggle-btn" onClick={() => openSidebar()}>
               <FaBars />
             </button>
           </div>
@@ -313,7 +316,7 @@ export function NavBar({ pageLinks }) {
 }
 
 // Sidebar
-const StyledSidebar = styled.aside`
+const StyledSidebar = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -322,11 +325,9 @@ const StyledSidebar = styled.aside`
   display: grid;
   place-items: center;
   visibility: hidden;
-  /* z-index: -999; */
-  z-index: 2;
   transition: var(--transition);
   transform: scale(0);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.1);
 
   &.show {
     visibility: visible;
@@ -335,22 +336,29 @@ const StyledSidebar = styled.aside`
   }
 
   .sidebar {
+    display: flex;
+    justify-content: flex-end;
     width: 90vw;
     height: 95vh;
     max-width: var(--fixed-width);
-    background: var(--light);
     border-radius: var(--radius);
-    /* box-shadow: var(--dark-shadow); */
-    position: relative;
-    padding: 4rem 2rem;
+    padding: 1rem;
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.color};
+
+    svg {
+      font-size: 2.5rem;
+    }
   }
 `;
 
 export function Sidebar() {
+  const { isSidebarOpen, closeSidebar } = useGlobalContext();
+
   return (
-    <StyledSidebar>
+    <StyledSidebar className={isSidebarOpen ? "show" : ""}>
       <aside className="sidebar">
-        <h1>test</h1>
+        <IoMdCloseCircle onClick={() => closeSidebar()} />
       </aside>
     </StyledSidebar>
   );
