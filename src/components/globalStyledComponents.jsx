@@ -120,10 +120,6 @@ const StyledSwitch = styled.label`
   color: ${({ theme }) =>
     theme.name === "light" ? "var(--dark)" : "var(--light)"};
 
-  &:hover {
-    background: var(--primary);
-  }
-
   /* Hide defualt checkbox */
   input[type="checkbox"] {
     height: 0;
@@ -187,8 +183,8 @@ const StyledNavBar = styled.nav`
       }
 
       .nav-logo {
-        height: calc(var(--nav-height) - 1rem);
-        width: calc(var(--nav-height) - 1rem);
+        height: calc(var(--nav-height) - 0.5rem);
+        width: calc(var(--nav-height) - 0.5rem);
         border-radius: 50%;
       }
 
@@ -247,7 +243,7 @@ const StyledNavBar = styled.nav`
         justify-content: space-evenly;
 
         .link {
-          font-size: 1.1rem;
+          font-size: 1.25rem;
           text-transform: capitalize;
           letter-spacing: 1px;
           cursor: pointer;
@@ -327,7 +323,8 @@ const StyledSidebar = styled.div`
   visibility: hidden;
   transition: var(--transition);
   transform: scale(0);
-  background: rgba(0, 0, 0, 0.1);
+  background: ${({ theme }) =>
+    theme.name === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)"};
 
   &.show {
     visibility: visible;
@@ -336,18 +333,23 @@ const StyledSidebar = styled.div`
   }
 
   .sidebar {
-    display: flex;
-    justify-content: flex-end;
+    display: grid;
+    align-items: center;
+    grid-template-rows: 0.5fr 4fr 0.5fr;
     width: 90vw;
     height: 95vh;
-    max-width: var(--fixed-width);
     border-radius: var(--radius);
     padding: 1rem;
     background: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.color};
 
-    svg {
+    .close-sidebar {
       font-size: 2.5rem;
+      justify-self: end;
+    }
+
+    .toggle-theme {
+      justify-self: center;
     }
   }
 `;
@@ -358,7 +360,12 @@ export function Sidebar() {
   return (
     <StyledSidebar className={isSidebarOpen ? "show" : ""}>
       <aside className="sidebar">
-        <IoMdCloseCircle onClick={() => closeSidebar()} />
+        <IoMdCloseCircle
+          className="close-sidebar"
+          onClick={() => closeSidebar()}
+        />
+        <div></div>
+        <ToggleSwitch />
       </aside>
     </StyledSidebar>
   );
@@ -372,13 +379,19 @@ const StyledFooter = styled.footer`
   min-height: var(--min-footer-height);
   background: var(--primary);
 
-  svg {
+  .footer-icons {
     font-size: 2rem;
+    border-radius: 50%;
+    transition: var(--transition);
     color: ${({ theme }) =>
+      theme.name === "light" ? "var(--dark)" : "var(--light)"};
+    background: ${({ theme }) =>
       theme.name === "light" ? "var(--light)" : "var(--dark)"};
 
     &:hover {
       color: ${({ theme }) =>
+        theme.name === "light" ? "var(--light)" : "var(--dark)"};
+      background: ${({ theme }) =>
         theme.name === "light" ? "var(--dark)" : "var(--light)"};
     }
   }
@@ -387,7 +400,7 @@ const StyledFooter = styled.footer`
 export function Footer() {
   return (
     <StyledFooter>
-      <FaGithub />
+      <FaGithub className="footer-icons" />
     </StyledFooter>
   );
 }
