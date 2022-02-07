@@ -8,17 +8,16 @@ Variables
 ===============
 */
 :root {
-  /* Primary light */
   --primary-light: #b0edfd;
   /* Primary Color */
   --primary: #61DBFB;
-  /* Primary dark */
   --primary-dark: #316e7e;
   --light: #FBFDFF;
   --dark: #27272A;
   --white: #fff;
   --black: #222;
   --active: ${() => (active ? active : "orangered")};
+  --primary-overlay: rgba(0, 0, 0, 0.2);
   --max-width: 1170px;
   --nav-height: 3.5rem;
   --min-footer-height: 10vh;
@@ -130,50 +129,6 @@ img:not(.nav-logo) {
     width: 95vw;
   }
 }
-
-/*
-=============== 
-Scroll Links
-===============
-*/
-.up {
-    position: fixed;
-    bottom: calc(var(--min-footer-height) + 1.5rem);
-    right: 1.5rem;
-    visibility: hidden;
-    /* z-index: -1; */
-  }
-
-  .show-up {
-    visibility: visible;
-    /* z-index: 1; */
-  }
-
-.down,
-  .up {
-    font-size: 2.5rem;
-    line-height: 0;
-    border-radius: 50%;
-    transition: var(--transition);
-    background: ${({ theme }) =>
-      theme.name === "light" ? "var(--light)" : "var(--dark)"};
-
-    &:hover {
-      color: var(--primary);
-    }
-  }
-
-  @media screen and (min-width: 800px) {
-    .down,
-    .up {
-      font-size: 3rem;
-    }
-
-    .up {
-      bottom: calc(var(--min-footer-height) + 4rem);
-    right: 4rem;
-    }
-  }
 `;
 
 export default GlobalStyles;

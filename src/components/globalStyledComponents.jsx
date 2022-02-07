@@ -10,7 +10,7 @@ import { FaBars, FaChevronCircleUp, FaGithub } from "react-icons/fa";
 import { GiSunflower, GiMoon } from "react-icons/gi";
 import { IoMdCloseCircle } from "react-icons/io";
 
-// Animation
+// Animations
 export const Spin = keyframes`
   from {
     transform: rotate(0deg);
@@ -24,136 +24,6 @@ export const Spin = keyframes`
 export const FixedNavSpacer = styled.div`
   height: var(--nav-height);
 `;
-
-// Back to top link
-export function BackToTop({ home }) {
-  const [scrollY, setScrollY] = useState("");
-  const up = useRef(null);
-
-  useEffect(
-    function () {
-      function updateScrollY() {
-        setScrollY(window.pageYOffset);
-
-        if (scrollY > 500) {
-          up.current.classList.add("show-up");
-        } else {
-          up.current.classList.remove("show-up");
-        }
-      }
-
-      window.addEventListener("scroll", updateScrollY);
-
-      return () => window.removeEventListener("scroll", updateScrollY);
-    },
-    [scrollY]
-  );
-
-  return (
-    <div className="up" ref={up}>
-      <ScrollLink to={home.links[0].to} offset={0} smooth={true}>
-        <FaChevronCircleUp />
-      </ScrollLink>
-    </div>
-  );
-}
-
-// Titles
-const StyledTitle = styled.div`
-  text-align: center;
-  margin: 0 auto;
-
-  .container {
-    display: inline-block;
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      line-height: 1.25;
-    }
-
-    .underline {
-      height: 0.25rem;
-      width: 75%;
-      margin: 0 auto;
-      background: ${({ theme }) =>
-        theme.name === "light"
-          ? "linear-gradient(to left, var(--primary-light), var(--primary-dark))"
-          : "linear-gradient(to right, var(--primary-dark), var(--primary-light))"};
-    }
-  }
-`;
-export function Title({ heading, title }) {
-  const titleElement = useRef(null);
-
-  useEffect(
-    function () {
-      heading !== undefined && title !== undefined
-        ? (titleElement.current.innerHTML = `<div class="container"><${heading}>${title}</${heading}><div class="underline" /></div>`)
-        : (titleElement.current.innerHTML =
-            "<div class='container'><h2>Sample H2 Title</h2><div class='underline'/></div>");
-    },
-    [heading, title]
-  );
-
-  return (
-    <>
-      <StyledTitle ref={titleElement} />
-    </>
-  );
-}
-
-// Theme Toggle
-const StyledSwitch = styled.label`
-  /* Slider pill */
-  display: inline-flex;
-  align-items: center;
-  height: calc(var(--nav-height) - 1.5rem);
-  width: calc(var(--nav-height) + 0.5rem);
-  font-size: 1.9rem;
-  border-radius: 30px;
-  margin: 0.25rem;
-  transition: var(--transition);
-  border: 2px solid
-    ${({ theme }) => (theme.name === "light" ? "var(--dark)" : "var(--light)")};
-  color: ${({ theme }) =>
-    theme.name === "light" ? "var(--dark)" : "var(--light)"};
-
-  /* Hide defualt checkbox */
-  input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    opacity: 0;
-  }
-
-  /* Move span when checked */
-  input[type="checkbox"]:checked + div {
-    transform: translateX(100%);
-  }
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--transition);
-  }
-`;
-
-export function ToggleSwitch() {
-  const { theme, toggleTheme } = useGlobalContext();
-
-  return (
-    <StyledSwitch className="toggle-theme">
-      <input
-        type="checkbox"
-        aria-label={`Toggle theme, currently ${theme}.`}
-        onClick={toggleTheme}
-      />
-      <div>{theme === "light" ? <GiSunflower /> : <GiMoon />}</div>
-    </StyledSwitch>
-  );
-}
 
 // Navbar
 const StyledNavBar = styled.nav`
@@ -308,6 +178,164 @@ export function NavBar({ pageLinks }) {
         </div>
       </StyledNavBar>
     </>
+  );
+}
+
+// Titles
+const StyledTitle = styled.div`
+  text-align: center;
+  margin: 0 auto;
+
+  .container {
+    display: inline-block;
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.25;
+    }
+
+    .underline {
+      height: 0.25rem;
+      width: 75%;
+      margin: 0 auto;
+      background: ${({ theme }) =>
+        theme.name === "light"
+          ? "linear-gradient(to left, var(--primary-light), var(--primary-dark))"
+          : "linear-gradient(to right, var(--primary-dark), var(--primary-light))"};
+    }
+  }
+`;
+
+export function Title({ heading, title }) {
+  const titleElement = useRef(null);
+
+  useEffect(
+    function () {
+      heading !== undefined && title !== undefined
+        ? (titleElement.current.innerHTML = `<div class="container"><${heading}>${title}</${heading}><div class="underline" /></div>`)
+        : (titleElement.current.innerHTML =
+            "<div class='container'><h2>Sample H2 Title</h2><div class='underline'/></div>");
+    },
+    [heading, title]
+  );
+
+  return (
+    <>
+      <StyledTitle ref={titleElement} />
+    </>
+  );
+}
+
+// Theme Toggle
+const StyledSwitch = styled.label`
+  /* Slider pill */
+  display: inline-flex;
+  align-items: center;
+  height: calc(var(--nav-height) - 1.5rem);
+  width: calc(var(--nav-height) + 0.5rem);
+  font-size: 1.9rem;
+  border-radius: 30px;
+  margin: 0.25rem;
+  transition: var(--transition);
+  border: 2px solid
+    ${({ theme }) => (theme.name === "light" ? "var(--dark)" : "var(--light)")};
+  color: ${({ theme }) =>
+    theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+  /* Hide defualt checkbox */
+  input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+
+  /* Move span when checked */
+  input[type="checkbox"]:checked + div {
+    transform: translateX(100%);
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+  }
+`;
+
+export function ToggleSwitch() {
+  const { theme, toggleTheme } = useGlobalContext();
+
+  return (
+    <StyledSwitch className="toggle-theme">
+      <input
+        type="checkbox"
+        aria-label={`Toggle theme, currently ${theme}.`}
+        onClick={toggleTheme}
+      />
+      <div>{theme === "light" ? <GiSunflower /> : <GiMoon />}</div>
+    </StyledSwitch>
+  );
+}
+
+// Back to top link
+const StyledDiv = styled.div`
+  position: fixed;
+  bottom: calc(var(--min-footer-height) + 1.5rem);
+  right: 1.5rem;
+  visibility: hidden;
+  font-size: 2.5rem;
+  line-height: 0;
+  border-radius: 50%;
+  transition: var(--transition);
+  background: ${({ theme }) =>
+    theme.name === "light" ? "var(--light)" : "var(--dark)"};
+
+  &.show-up {
+    visibility: visible;
+  }
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  @media screen and (min-width: 800px) {
+    font-size: 3rem;
+    bottom: calc(var(--min-footer-height) + 4rem);
+    right: 4rem;
+  }
+`;
+
+export function BackToTop({ home }) {
+  const [scrollY, setScrollY] = useState("");
+  const up = useRef(null);
+
+  useEffect(
+    function () {
+      function updateScrollY() {
+        setScrollY(window.pageYOffset);
+
+        if (scrollY > 500) {
+          up.current.classList.add("show-up");
+        } else {
+          up.current.classList.remove("show-up");
+        }
+      }
+
+      window.addEventListener("scroll", updateScrollY);
+
+      return () => window.removeEventListener("scroll", updateScrollY);
+    },
+    [scrollY]
+  );
+
+  return (
+    <StyledDiv ref={up}>
+      <ScrollLink to={home.links[0].to} offset={0} smooth={true}>
+        <FaChevronCircleUp />
+      </ScrollLink>
+    </StyledDiv>
   );
 }
 

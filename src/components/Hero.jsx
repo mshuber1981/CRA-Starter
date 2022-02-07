@@ -39,7 +39,7 @@ const StyledHero = styled.header`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--primary-overlay);
     z-index: -1;
   }
 
@@ -51,6 +51,19 @@ const StyledHero = styled.header`
 
     .hero-images {
       display: none;
+    }
+  }
+
+  .down {
+    font-size: 2.5rem;
+    line-height: 0;
+    border-radius: 50%;
+    transition: var(--transition);
+    background: ${({ theme }) =>
+      theme.name === "light" ? "var(--light)" : "var(--dark)"};
+
+    &:hover {
+      color: var(--primary);
     }
   }
 
