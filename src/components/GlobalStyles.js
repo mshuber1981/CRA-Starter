@@ -18,6 +18,8 @@ Variables
   --black: #222;
   --active: ${() => (active ? active : "orangered")};
   --primary-overlay: rgba(0, 0, 0, 0.2);
+  --light-overlay: rgba(255, 255, 255, 0.1);
+  --dark-overlay: rgba(0, 0, 0, 0.1);
   --max-width: 1170px;
   --nav-height: 3.5rem;
   --min-footer-height: 10vh;
