@@ -49,7 +49,9 @@ const StyledNavBar = styled.nav`
       .toggle-btn,
       .nav-logo {
         background: ${({ theme }) =>
-          theme.name === "light" ? "var(--light)" : "var(--dark)"};
+          theme.name === "light"
+            ? "var(--dark-overlay)"
+            : "var(--light-overlay)"};
       }
 
       .nav-logo {
@@ -85,9 +87,7 @@ const StyledNavBar = styled.nav`
 
   @media screen and (min-width: 800px) {
     background: ${({ theme }) =>
-      theme.name === "light"
-        ? "rgba(0, 0, 0, 0.1)"
-        : "rgba(255, 255, 255, 0.1)"};
+      theme.name === "light" ? "var(--dark-overlay)" : "var(--light-overlay)"};
 
     .nav-center {
       display: grid;
@@ -96,7 +96,8 @@ const StyledNavBar = styled.nav`
 
       .nav-header {
         .nav-logo {
-          background: transparent;
+          background: ${({ theme }) =>
+            theme.name === "light" ? "var(--dark)" : "var(--light-overlay)"};
         }
 
         .toggle-btn {
@@ -112,22 +113,32 @@ const StyledNavBar = styled.nav`
         display: flex;
         justify-content: space-evenly;
 
-        .link {
-          font-size: 1.25rem;
-          text-transform: capitalize;
-          letter-spacing: 1px;
-          cursor: pointer;
-          transition: var(--transition);
-          color: ${({ theme }) =>
-            theme.name === "light" ? "var(--dark)" : "var(--light)"};
+        li {
+          transition: all 0.2s ease-in-out;
 
-          &:hover {
-            color: var(--primary);
+          .link {
+            font-size: 1.25rem;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: var(--radius);
+            padding: 0 0.25rem;
+            color: ${({ theme }) =>
+              theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+            &:hover {
+              /* color: var(--primary); */
+              border: 1px solid var(--primary);
+            }
+          }
+
+          .active {
+            color: var(--active);
           }
         }
 
-        .active {
-          color: var(--active);
+        li:hover {
+          transform: scale(1.3);
         }
       }
     }
@@ -352,7 +363,7 @@ const StyledSidebar = styled.div`
   transition: var(--transition);
   transform: scale(0);
   background: ${({ theme }) =>
-    theme.name === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)"};
+    theme.name === "light" ? "var(--dark-overlay)" : "var(--light-overlay)"};
 
   &.show {
     visibility: visible;
@@ -366,6 +377,7 @@ const StyledSidebar = styled.div`
     grid-template-rows: 0.5fr 4fr 0.5fr;
     width: 90vw;
     height: 95vh;
+    border: 2px solid var(--primary);
     border-radius: var(--radius);
     padding: 1rem;
     background: ${({ theme }) => theme.background};
