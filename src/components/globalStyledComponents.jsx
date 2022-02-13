@@ -46,18 +46,15 @@ const StyledNavBar = styled.nav`
       justify-content: space-between;
       align-items: center;
 
-      .toggle-btn,
-      .nav-logo {
-        background: ${({ theme }) =>
-          theme.name === "light"
-            ? "var(--dark-overlay)"
-            : "var(--light-overlay)"};
+      .toggle-btn {
+        background: transparent;
       }
 
       .nav-logo {
         height: calc(var(--nav-height) - 0.5rem);
         width: calc(var(--nav-height) - 0.5rem);
         border-radius: 50%;
+        background: var(--dark);
       }
 
       .toggle-btn {
@@ -95,11 +92,6 @@ const StyledNavBar = styled.nav`
       align-items: center;
 
       .nav-header {
-        .nav-logo {
-          background: ${({ theme }) =>
-            theme.name === "light" ? "var(--dark)" : "var(--light-overlay)"};
-        }
-
         .toggle-btn {
           display: none;
         }
@@ -127,8 +119,10 @@ const StyledNavBar = styled.nav`
               theme.name === "light" ? "var(--dark)" : "var(--light)"};
 
             &:hover {
-              /* color: var(--primary); */
-              border: 1px solid var(--primary);
+              color: var(--primary);
+              border: 2px solid var(--primary);
+              background: ${({ theme }) =>
+                theme.name === "light" ? "var(--dark)" : "transparent"};
             }
           }
 
@@ -138,7 +132,7 @@ const StyledNavBar = styled.nav`
         }
 
         li:hover {
-          transform: scale(1.3);
+          transform: scale(1.1);
         }
       }
     }
@@ -423,6 +417,9 @@ const StyledFooter = styled.footer`
     font-size: 2rem;
     border-radius: 50%;
     transition: var(--transition);
+    border: 1px solid
+      ${({ theme }) =>
+        theme.name === "light" ? "var(--light)" : "var(--dark)"};
     color: ${({ theme }) =>
       theme.name === "light" ? "var(--dark)" : "var(--light)"};
     background: ${({ theme }) =>

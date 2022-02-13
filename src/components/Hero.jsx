@@ -59,6 +59,9 @@ const StyledHero = styled.header`
     line-height: 0;
     border-radius: 50%;
     transition: var(--transition);
+    border: 1px solid
+      ${({ theme }) =>
+        theme.name === "light" ? "var(--light)" : "var(--dark)"};
     background: ${({ theme }) =>
       theme.name === "light" ? "var(--light)" : "var(--dark)"};
 
