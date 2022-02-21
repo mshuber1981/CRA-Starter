@@ -12,7 +12,7 @@ export default function Home({ home }) {
   return (
     <>
       <NavBar pageLinks={home.links} />
-      <Sidebar />
+      <Sidebar pageLinks={home.links} />
       <Hero section1={home.links[1].to} />
       <main>
         <Section1 section1={home.links[1]} />

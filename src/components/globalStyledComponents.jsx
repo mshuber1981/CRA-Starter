@@ -367,7 +367,6 @@ const StyledSidebar = styled.div`
 
   .sidebar {
     display: grid;
-    align-items: center;
     grid-template-rows: 0.5fr 4fr 0.5fr;
     width: 90vw;
     height: 95vh;
@@ -384,11 +383,18 @@ const StyledSidebar = styled.div`
 
     .toggle-theme {
       justify-self: center;
+      align-self: center;
+    }
+
+    .sidebar-links {
+      .active {
+        color: var(--active);
+      }
     }
   }
 `;
 
-export function Sidebar() {
+export function Sidebar({ pageLinks }) {
   const { isSidebarOpen, closeSidebar } = useGlobalContext();
 
   return (
@@ -398,7 +404,31 @@ export function Sidebar() {
           className="close-sidebar"
           onClick={() => closeSidebar()}
         />
-        <div></div>
+        <div className="sidebar-links">
+          {pageLinks.map(function ({ id, name, to }, index) {
+            return (
+              <li key={id}>
+                {to.startsWith("/") ? (
+                  <Link to={to} className="link" onClick={() => closeSidebar()}>
+                    {name}
+                  </Link>
+                ) : (
+                  <ScrollLink
+                    to={to}
+                    offset={index === 0 ? 0 : -80}
+                    smooth={true}
+                    spy={true}
+                    activeClass="active"
+                    className="link"
+                    onClick={() => closeSidebar()}
+                  >
+                    {name}
+                  </ScrollLink>
+                )}
+              </li>
+            );
+          })}
+        </div>
         <ToggleSwitch />
       </aside>
     </StyledSidebar>
