@@ -387,6 +387,14 @@ const StyledSidebar = styled.div`
     }
 
     .sidebar-links {
+      .link {
+        font-size: 1.25rem;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        color: ${({ theme }) =>
+          theme.name === "light" ? "var(--dark)" : "var(--light)"};
+      }
+
       .active {
         color: var(--active);
       }
@@ -405,29 +413,35 @@ export function Sidebar({ pageLinks }) {
           onClick={() => closeSidebar()}
         />
         <div className="sidebar-links">
-          {pageLinks.map(function ({ id, name, to }, index) {
-            return (
-              <li key={id}>
-                {to.startsWith("/") ? (
-                  <Link to={to} className="link" onClick={() => closeSidebar()}>
-                    {name}
-                  </Link>
-                ) : (
-                  <ScrollLink
-                    to={to}
-                    offset={index === 0 ? 0 : -80}
-                    smooth={true}
-                    spy={true}
-                    activeClass="active"
-                    className="link"
-                    onClick={() => closeSidebar()}
-                  >
-                    {name}
-                  </ScrollLink>
-                )}
-              </li>
-            );
-          })}
+          <ul>
+            {pageLinks.map(function ({ id, name, to }, index) {
+              return (
+                <li key={id}>
+                  {to.startsWith("/") ? (
+                    <Link
+                      to={to}
+                      className="link"
+                      onClick={() => closeSidebar()}
+                    >
+                      {name}
+                    </Link>
+                  ) : (
+                    <ScrollLink
+                      to={to}
+                      offset={index === 0 ? 0 : -80}
+                      smooth={true}
+                      spy={true}
+                      activeClass="active"
+                      className="link"
+                      onClick={() => closeSidebar()}
+                    >
+                      {name}
+                    </ScrollLink>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
         <ToggleSwitch />
       </aside>
