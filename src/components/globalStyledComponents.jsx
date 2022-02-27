@@ -4,9 +4,9 @@ import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink, Element } from "react-scroll";
 // Data
-import { Logo } from "../data";
+import { Logo, Socials } from "../data";
 // Icons
-import { FaBars, FaChevronCircleUp, FaGithub } from "react-icons/fa";
+import { FaBars, FaChevronCircleUp } from "react-icons/fa";
 import { GiSunflower, GiMoon } from "react-icons/gi";
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -122,7 +122,9 @@ const StyledNavBar = styled.nav`
               color: var(--primary);
               border: 2px solid var(--primary);
               background: ${({ theme }) =>
-                theme.name === "light" ? "var(--dark)" : "transparent"};
+                theme.name === "light"
+                  ? "rgba(0, 0, 0, 0.7)"
+                  : "rgba(0, 0, 0, 0.3)"};
             }
           }
 
@@ -457,23 +459,14 @@ const StyledFooter = styled.footer`
   min-height: var(--min-footer-height);
   background: var(--primary);
 
-  .footer-icons {
-    font-size: 2rem;
-    border-radius: 50%;
+  svg {
+    margin: 0 1rem;
+    font-size: 2.5rem;
     transition: var(--transition);
-    border: 1px solid
-      ${({ theme }) =>
-        theme.name === "light" ? "var(--light)" : "var(--dark)"};
-    color: ${({ theme }) =>
-      theme.name === "light" ? "var(--dark)" : "var(--light)"};
-    background: ${({ theme }) =>
-      theme.name === "light" ? "var(--light)" : "var(--dark)"};
+    color: var(--dark);
 
     &:hover {
-      color: ${({ theme }) =>
-        theme.name === "light" ? "var(--light)" : "var(--dark)"};
-      background: ${({ theme }) =>
-        theme.name === "light" ? "var(--dark)" : "var(--light)"};
+      color: var(--light);
     }
   }
 `;
@@ -481,7 +474,13 @@ const StyledFooter = styled.footer`
 export function Footer() {
   return (
     <StyledFooter>
-      <FaGithub className="footer-icons" />
+      {Socials.map(function ({ id, icon, link }) {
+        return (
+          <a href={link} key={id} className="footer-icons">
+            {icon}
+          </a>
+        );
+      })}
     </StyledFooter>
   );
 }
