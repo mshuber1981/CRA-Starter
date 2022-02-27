@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
+// Data
+import { Socials } from "../data";
 // Icons
 import { FaChevronCircleDown } from "react-icons/fa";
 // Media
@@ -48,6 +50,25 @@ const StyledHero = styled.header`
     max-width: var(--max-width);
     display: grid;
     justify-content: center;
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: var(--min-footer-height);
+
+      svg {
+        margin: 0 1rem;
+        font-size: 2.5rem;
+        transition: var(--transition);
+        color: ${({ theme }) =>
+          theme.name === "light" ? "var(--dark)" : "var(--light)"};
+
+        &:hover {
+          color: var(--primary);
+        }
+      }
+    }
 
     .hero-images {
       display: none;
@@ -120,6 +141,15 @@ export default function Hero({ section1 }) {
             <br />
             Call To Action
           </h1>
+          <div className="socials">
+            {Socials.map(function ({ id, icon, link }) {
+              return (
+                <a href={link} key={id} className="icons">
+                  {icon}
+                </a>
+              );
+            })}
+          </div>
         </article>
         <article className="hero-images">
           <img src={Logo} alt="React Logo" className="hero-img" />
