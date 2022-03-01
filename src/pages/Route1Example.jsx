@@ -1,5 +1,5 @@
 // Components
-import { NavBar, Sidebar } from "../components/globalStyledComponents";
+import { NavBar, Sidebar, Title } from "../components/globalStyledComponents";
 
 export default function Route1Example({ route1 }) {
   return (
@@ -8,7 +8,7 @@ export default function Route1Example({ route1 }) {
       <Sidebar pageLinks={route1.links} />
       <main>
         <section className="section section-center">
-          <h1>h1</h1>
+          <Title heading={"h1"} title={"Route 1"} />
         </section>
       </main>
     </>
