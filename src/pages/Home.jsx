@@ -1,26 +1,41 @@
+import React from "react";
+import { useAppContext } from "../appContext";
 // Components
-import Hero from "../components/Hero";
-import { Section1, Section2, Section3 } from "../components/HomeSections";
-import {
-  BackToTop,
-  Footer,
-  NavBar,
-  Sidebar,
-} from "../components/globalStyledComponents";
+import { NavBar, BackToTop, Title } from "../components/globalStyledComponents";
+import { Button, Container } from "react-bootstrap";
 
-export default function Home({ home }) {
+export default function Home() {
+  const { theme, toggleTheme } = useAppContext();
+
   return (
     <>
-      <NavBar pageLinks={home.links} />
-      <Sidebar pageLinks={home.links} />
-      <Hero section1={home.links[1].to} />
+      <NavBar />
       <main>
-        <Section1 section1={home.links[1]} />
-        <Section2 section2={home.links[2]} />
-        <Section3 section3={home.links[3]} />
+        <section>
+          <Container className="d-flex">
+            <Title>
+              <h2>h1 Title</h2>
+              <div className="underline"></div>
+            </Title>
+          </Container>
+          <Container>
+            <h2>h2</h2>
+            <h3>h3</h3>
+            <h4>h4</h4>
+            <h5>h5</h5>
+            <h6>h6</h6>
+            <Button
+              size="lg"
+              variant={theme === "light" ? "outline-dark" : "outline-light"}
+              className="mt-5"
+              onClick={toggleTheme}
+            >
+              Themed Button
+            </Button>
+          </Container>
+        </section>
       </main>
-      <BackToTop home={home} />
-      <Footer />
+      <BackToTop />
     </>
   );
 }
