@@ -1,16 +1,14 @@
 {
   "files": {
-    "main.css": "/CRA-Starter/static/css/main.7d40bf6a.css",
-    "main.js": "/CRA-Starter/static/js/main.8c2985a2.js",
-    "static/media/hero-dark.jpg": "/CRA-Starter/static/media/hero-dark.1c357cdd35601bcb4a51.jpg",
-    "static/media/hero-light.jpg": "/CRA-Starter/static/media/hero-light.6bbc074c42243487ad3a.jpg",
+    "main.css": "/CRA-Starter/static/css/main.434d85ca.css",
+    "main.js": "/CRA-Starter/static/js/main.e6e266c5.js",
     "static/media/logo.svg": "/CRA-Starter/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/CRA-Starter/index.html",
-    "main.7d40bf6a.css.map": "/CRA-Starter/static/css/main.7d40bf6a.css.map",
-    "main.8c2985a2.js.map": "/CRA-Starter/static/js/main.8c2985a2.js.map"
+    "main.434d85ca.css.map": "/CRA-Starter/static/css/main.434d85ca.css.map",
+    "main.e6e266c5.js.map": "/CRA-Starter/static/js/main.e6e266c5.js.map"
   },
   "entrypoints": [
-    "static/css/main.7d40bf6a.css",
-    "static/js/main.8c2985a2.js"
+    "static/css/main.434d85ca.css",
+    "static/js/main.e6e266c5.js"
   ]
 }
