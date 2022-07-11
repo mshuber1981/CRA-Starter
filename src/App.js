@@ -79,7 +79,7 @@ export default function App() {
           <GlobalStyles />
           <Routes>
             <Route exact path="/" element={<Home />} />
-            {/* <Route path="/All-Projects" element={<AllProjects />} /> */}
+            {/* <Route path="/Route1" element={<AllProjects />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ThemeProvider>

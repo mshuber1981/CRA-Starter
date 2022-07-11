@@ -1,7 +1,12 @@
 import React from "react";
 import { useAppContext } from "../appContext";
 // Components
-import { NavBar, BackToTop, Title } from "../components/globalStyledComponents";
+import {
+  NavBar,
+  BackToTop,
+  Title,
+  Loading,
+} from "../components/globalStyledComponents";
 import { Button, Container } from "react-bootstrap";
 
 export default function Home() {
@@ -18,7 +23,7 @@ export default function Home() {
               <div className="underline"></div>
             </Title>
           </Container>
-          <Container>
+          <Container className="">
             <h2>h2</h2>
             <h3>h3</h3>
             <h4>h4</h4>
@@ -27,11 +32,13 @@ export default function Home() {
             <Button
               size="lg"
               variant={theme === "light" ? "outline-dark" : "outline-light"}
-              className="mt-5"
+              className="mt-2 mb-2"
               onClick={toggleTheme}
             >
               Themed Button
             </Button>
+            <br />
+            <Loading />
           </Container>
         </section>
       </main>

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 // Data
-import { Primary } from "../data";
+import { primary } from "../data";
 
 const GlobalStyles = createGlobalStyle`
 /*
@@ -11,7 +11,7 @@ Variables
 :root {
   --primary-light: #b0edfd;
   /* Primary Color */
-  --primary: ${Primary};
+  --primary: ${primary};
   --primary-dark: #316e7e;
   --nav-height: 61px;
 }
@@ -31,7 +31,7 @@ a:hover {
 }
 
 .navbar {
-  border-bottom: 1px solid ${Primary};
+  border-bottom: 1px solid ${primary};
 }
 
 .link-icons {

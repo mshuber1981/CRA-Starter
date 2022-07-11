@@ -9,9 +9,17 @@ export const githubUsername = "mshuber1981";
 /* Navigation Logo
  **************************************************************
  */
-export const Logo = navLogo;
+export const logo = navLogo;
 
 /* Colors
  **************************************************************
  */
-export const Primary = "#61DBFB";
+export const primary = "#61DBFB";
+
+/* Colors
+ **************************************************************
+ */
+export const routes = {
+  home: "/",
+  route1: "/Route1",
+};

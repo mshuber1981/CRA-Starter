@@ -3,7 +3,7 @@ import { useAppContext } from "../appContext";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-scroll/modules";
 // Data
-import { Logo } from "../data";
+import { logo } from "../data";
 // Icons
 import { GiSunflower, GiMoon } from "react-icons/gi";
 import { FaChevronCircleUp } from "react-icons/fa";
@@ -53,7 +53,7 @@ export function NavBar() {
           <Navbar.Brand>
             <img
               alt="React Logo"
-              src={Logo}
+              src={logo}
               width="35"
               height="35"
               className="d-inline-block align-top bg-dark rounded-circle nav-logo"
@@ -133,6 +133,7 @@ export const Title = styled.div`
     height: 0.25rem;
     width: 75%;
     min-width: 3rem;
+    border-radius: 0.25rem;
     background: var(--clr-primary-5);
     margin: 0 auto 1.5rem auto;
     background: ${({ theme }) =>
