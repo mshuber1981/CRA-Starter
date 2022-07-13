@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 // Components
-import { Title } from "../components/globalStyledComponents";
+import { NavBar, Title } from "../components/globalStyledComponents";
 import { Container } from "react-bootstrap";
 
 const StyledNotFound = styled.main`
@@ -15,14 +15,15 @@ const StyledNotFound = styled.main`
 export default function NotFound() {
   return (
     <>
+      <NavBar />
       <StyledNotFound>
         <Container className="d-flex">
           <Title>
-            <h2>404</h2>
+            <h2 className="display-1">404</h2>
             <div className="underline"></div>
           </Title>
         </Container>
-        <p className="text-center">Sorry, page not found...</p>
+        <p className="text-center display-6">Sorry, page not found...</p>
       </StyledNotFound>
     </>
   );
