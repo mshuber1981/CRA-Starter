@@ -1,7 +1,8 @@
 import React from "react";
 import { useAppContext } from "../appContext";
+import { Link, useLocation } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll/modules";
 import styled, { keyframes } from "styled-components";
-import { Link } from "react-scroll/modules";
 // Data
 import { logo } from "../data";
 // Icons
@@ -36,6 +37,7 @@ export const FixedNavSpacer = styled.div`
 
 export function NavBar() {
   const { theme, isExpanded, toggleExpanded, closeExpanded } = useAppContext();
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -65,7 +67,26 @@ export function NavBar() {
           />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav navbarScroll className="me-auto">
-              <Nav.Item>Home</Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/"
+                  className={pathname === "/" ? "nav-link active" : "nav-link"}
+                  onClick={closeExpanded}
+                >
+                  Home
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/Route1"
+                  className={
+                    pathname === "/Route1" ? "nav-link active" : "nav-link"
+                  }
+                  onClick={closeExpanded}
+                >
+                  Route 1
+                </Link>
+              </Nav.Item>
             </Nav>
             <Nav>
               <ThemeToggle />
@@ -184,9 +205,9 @@ export function BackToTop({ home }) {
 
   return (
     <StyledDiv ref={up}>
-      <Link to={"home"} className="link-icons">
+      <ScrollLink to={"home"} className="link-icons">
         <FaChevronCircleUp />
-      </Link>
+      </ScrollLink>
     </StyledDiv>
   );
 }
