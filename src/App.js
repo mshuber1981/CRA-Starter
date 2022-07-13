@@ -15,6 +15,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import GlobalStyles from "./components/GlobalStyles";
 // Pages
 import Home from "./pages/Home";
+import Route1 from "./pages/Route1";
 import NotFound from "./pages/NotFound";
 
 const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -79,7 +80,7 @@ export default function App() {
           <GlobalStyles />
           <Routes>
             <Route exact path="/" element={<Home />} />
-            {/* <Route path="/Route1" element={<AllProjects />} /> */}
+            <Route path="/Route1" element={<Route1 />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ThemeProvider>
