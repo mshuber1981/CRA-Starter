@@ -14,6 +14,7 @@ Variables
   --primary: ${primary};
   --primary-dark: #316e7e;
   --nav-height: 61px;
+  --transition: all 0.3s linear;
 }
 
 /*
