@@ -14,6 +14,7 @@ Variables
   --primary: ${primary};
   --primary-dark: #316e7e;
   --nav-height: 61px;
+  --min-footer-height: 11vh;
   --transition: all 0.3s linear;
 }
 
@@ -50,6 +51,13 @@ img:not(.nav-logo) {
   width: 100%;
   height: auto;
   display: block;
+}
+
+.section {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--nav-height) 0;
 }
 
 .title {
