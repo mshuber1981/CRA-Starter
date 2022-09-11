@@ -205,7 +205,7 @@ export function BackToTop({ home }) {
 
   return (
     <StyledDiv ref={up}>
-      <ScrollLink to={"home"} className="link-icons">
+      <ScrollLink to={home} className="link-icons">
         <FaChevronCircleUp />
       </ScrollLink>
     </StyledDiv>
