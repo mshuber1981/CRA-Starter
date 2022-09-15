@@ -1,12 +1,7 @@
 import React from "react";
 import { useAppContext } from "../appContext";
 // Components
-import {
-  NavBar,
-  BackToTop,
-  Title,
-  Loading,
-} from "../components/globalStyledComponents";
+import { NavBar, Title, Loading } from "../components/globalStyledComponents";
 import { Button, Container } from "react-bootstrap";
 
 export default function Home() {
@@ -42,7 +37,6 @@ export default function Home() {
           </Container>
         </section>
       </main>
-      <BackToTop />
     </>
   );
 }
