@@ -4,7 +4,7 @@
   "homepage": "https://mshuber1981.github.io/CRA-Starter",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.6",
+    "@reduxjs/toolkit": "^1.9.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -14,7 +14,7 @@
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
-    "react-redux": "^8.0.4",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-scroll": "^1.8.7",
     "styled-components": "^5.3.6"
