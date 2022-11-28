@@ -5,6 +5,7 @@ import { AppProvider } from "./appContext";
 // https://redux.js.org/tutorials/fundamentals/part-5-ui-react#passing-the-store-with-provider
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 // https://create-react-app.dev/docs/adding-bootstrap
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./App";
@@ -15,7 +16,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <AppProvider>
-      <App />
+      <HelmetProvider>
+        <Helmet>
+          <title>CRA Template</title>
+        </Helmet>
+        <App />
+      </HelmetProvider>
     </AppProvider>
   </Provider>
 );
