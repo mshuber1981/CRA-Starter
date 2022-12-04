@@ -23,3 +23,10 @@ export const routes = {
   home: "/",
   route1: "/Route1",
 };
+
+/* SEO
+ **************************************************************
+ */
+//  https://css-tricks.com/essential-meta-tags-social-media/
+export const pubImagePath = "https://mshuber1981.github.io/CRA-Starter/cra.png";
+export const hostUrl = "https://mshuber1981.github.io/CRA-Starter/";

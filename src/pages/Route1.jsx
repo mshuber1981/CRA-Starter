@@ -4,11 +4,13 @@ import { Element, Link } from "react-scroll";
 import { FaChevronCircleDown } from "react-icons/fa";
 // Components
 import { BackToTop, NavBar, Title } from "../components/globalStyledComponents";
+import SEO from "../components/SEO";
 import { Container } from "react-bootstrap";
 
 export default function Home() {
   return (
     <>
+      <SEO title={"Route 1 Title"} />
       <NavBar />
       <main>
         <Element name={"top"}>

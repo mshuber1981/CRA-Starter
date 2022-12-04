@@ -1,14 +1,19 @@
 import React from "react";
 import { useAppContext } from "../appContext";
+import { useSelector } from "react-redux";
+import { selectData } from "./homeSlice";
 // Components
 import { NavBar, Title, Loading } from "../components/globalStyledComponents";
+import SEO from "../components/SEO";
 import { Button, Container } from "react-bootstrap";
 
 export default function Home() {
   const { theme, toggleTheme } = useAppContext();
+  const data = useSelector(selectData);
 
   return (
     <>
+      <SEO title={data.name ? `${data.name} | CRA Template` : "Home Title"} />
       <NavBar />
       <main>
         <section>
