@@ -5,6 +5,7 @@ import { selectData } from "./homeSlice";
 // Components
 import { NavBar, Title, Loading } from "../components/globalStyledComponents";
 import SEO from "../components/SEO";
+import ResponsiveImages from "../components/ResponsiveImages";
 import { Button, Container } from "react-bootstrap";
 
 export default function Home() {
@@ -39,6 +40,7 @@ export default function Home() {
             </Button>
             <br />
             <Loading />
+            <ResponsiveImages />
           </Container>
         </section>
       </main>
