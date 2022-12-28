@@ -13,6 +13,7 @@ import { Loading } from "./components/globalStyledComponents";
 import { Container } from "react-bootstrap";
 import ScrollToTop from "./components/ScrollToTop";
 import GlobalStyles from "./components/GlobalStyles";
+import NavBar from "./components/NavBar";
 // Pages
 import Home from "./pages/Home";
 import Route1 from "./pages/Route1";
@@ -31,6 +32,18 @@ const themes = {
     background: "#27272A",
   },
 };
+const navLinks = [
+  {
+    id: 1,
+    name: "Home",
+    route: "/",
+  },
+  {
+    id: 2,
+    name: "Route 1",
+    route: "/Route1",
+  },
+];
 
 export default function App() {
   const { theme, setTheme } = useAppContext();
@@ -58,18 +71,22 @@ export default function App() {
     return (
       <ThemeProvider theme={themes[theme]}>
         <GlobalStyles />
-        <Container className="d-flex vh-100 align-items-center">
-          <Loading />
-        </Container>
+        <main>
+          <Container className="d-flex vh-100 align-items-center">
+            <Loading />
+          </Container>
+        </main>
       </ThemeProvider>
     );
   } else if (error) {
     return (
       <ThemeProvider theme={themes[theme]}>
         <GlobalStyles />
-        <Container className="d-flex vh-100 align-items-center justify-content-center">
-          <h2>{error}</h2>
-        </Container>
+        <main>
+          <Container className="d-flex vh-100 align-items-center justify-content-center">
+            <h2>{error}</h2>
+          </Container>
+        </main>
       </ThemeProvider>
     );
   } else {
@@ -78,11 +95,14 @@ export default function App() {
         <ScrollToTop />
         <ThemeProvider theme={themes[theme]}>
           <GlobalStyles />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/Route1" element={<Route1 />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <NavBar navLinks={navLinks} />
+          <main>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/Route1" element={<Route1 />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
         </ThemeProvider>
       </HashRouter>
     );

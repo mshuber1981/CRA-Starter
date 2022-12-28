@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 // Components
-import { NavBar, Title } from "../components/globalStyledComponents";
+import { Title } from "../components/globalStyledComponents";
 import { Container } from "react-bootstrap";
 
 const StyledNotFound = styled.main`
@@ -13,9 +13,13 @@ const StyledNotFound = styled.main`
 `;
 
 export default function NotFound() {
+  React.useEffect(() => {
+    const updateTitle = () => (document.title = "404");
+    updateTitle();
+  }, []);
+
   return (
     <>
-      <NavBar />
       <StyledNotFound>
         <Container className="d-flex">
           <Title>

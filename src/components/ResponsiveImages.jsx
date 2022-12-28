@@ -10,7 +10,7 @@ import mobile2x from "../images/mobile@2x.png";
 const ResponsiveImages = () => {
   return (
     <>
-      <picture>
+      <picture className="mb-3">
         <source media="(max-width: 420px)" srcSet={`${mobile}, ${mobile2x}`} />
         <source media="(max-width: 820px)" srcSet={`${tablet}, ${tablet2x}`} />
         <source srcSet={`${desktop}, ${desktop2x}`} />
