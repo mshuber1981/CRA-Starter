@@ -4,6 +4,7 @@
   "homepage": "https://mshuber1981.github.io/CRA-Starter",
   "private": true,
   "dependencies": {
+    "@iconify/react": "^4.0.1",
     "@reduxjs/toolkit": "^1.9.1",
     "bootstrap": "^5.2.3",
     "gh-pages": "^4.0.0",
@@ -11,7 +12,6 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.6.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
     "react-scroll": "^1.8.7",

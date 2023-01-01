@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Link as ScrollLink } from "react-scroll/modules";
 // Icons
-import { FaChevronCircleUp } from "react-icons/fa";
+import { Icon } from "@iconify/react";
 
 // Animations
 const spinner = keyframes`
@@ -85,7 +85,7 @@ export function BackToTop({ home }) {
   return (
     <StyledDiv ref={up}>
       <ScrollLink to={home} className="link-icons">
-        <FaChevronCircleUp />
+        <Icon icon="fa-solid:chevron-circle-up" />
       </ScrollLink>
     </StyledDiv>
   );

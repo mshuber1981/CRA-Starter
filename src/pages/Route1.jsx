@@ -1,7 +1,7 @@
 import React from "react";
 import { Element, Link } from "react-scroll";
 // icons
-import { FaChevronCircleDown } from "react-icons/fa";
+import { Icon } from "@iconify/react";
 // Components
 import { BackToTop, Title } from "../components/globalStyledComponents";
 import { Container } from "react-bootstrap";
@@ -24,7 +24,7 @@ export default function Home() {
           </Container>
           <Container className="text-center">
             <Link to={"scroll"} className="link-icons">
-              <FaChevronCircleDown />
+              <Icon icon="fa-solid:chevron-circle-down" />
             </Link>
           </Container>
         </section>
