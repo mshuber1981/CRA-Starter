@@ -1,20 +1,19 @@
 {
   "files": {
     "main.css": "/CRA-Starter/static/css/main.d31e985f.css",
-    "main.js": "/CRA-Starter/static/js/main.c5c254ec.js",
+    "main.js": "/CRA-Starter/static/js/main.971f1f27.js",
     "static/media/desktop@2x.png": "/CRA-Starter/static/media/desktop@2x.9a20b2f861c269cf641e.png",
     "static/media/desktop.png": "/CRA-Starter/static/media/desktop.5285b502613a0febde43.png",
     "static/media/tablet@2x.png": "/CRA-Starter/static/media/tablet@2x.5b48ba91deaa3a6bfdda.png",
     "static/media/mobile@2x.png": "/CRA-Starter/static/media/mobile@2x.3b5c64e379f7050a22b0.png",
     "static/media/tablet.png": "/CRA-Starter/static/media/tablet.99009b4fa3de4a04c85d.png",
     "static/media/mobile.png": "/CRA-Starter/static/media/mobile.01be34b0ff95ec54e79c.png",
-    "static/media/logo.svg": "/CRA-Starter/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/CRA-Starter/index.html",
     "main.d31e985f.css.map": "/CRA-Starter/static/css/main.d31e985f.css.map",
-    "main.c5c254ec.js.map": "/CRA-Starter/static/js/main.c5c254ec.js.map"
+    "main.971f1f27.js.map": "/CRA-Starter/static/js/main.971f1f27.js.map"
   },
   "entrypoints": [
     "static/css/main.d31e985f.css",
-    "static/js/main.c5c254ec.js"
+    "static/js/main.971f1f27.js"
   ]
 }
