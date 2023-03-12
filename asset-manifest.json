@@ -1,7 +1,8 @@
 {
   "files": {
     "main.css": "/CRA-Starter/static/css/main.d31e985f.css",
-    "main.js": "/CRA-Starter/static/js/main.971f1f27.js",
+    "main.js": "/CRA-Starter/static/js/main.7915a039.js",
+    "static/js/717.e050471b.chunk.js": "/CRA-Starter/static/js/717.e050471b.chunk.js",
     "static/media/desktop@2x.png": "/CRA-Starter/static/media/desktop@2x.9a20b2f861c269cf641e.png",
     "static/media/desktop.png": "/CRA-Starter/static/media/desktop.5285b502613a0febde43.png",
     "static/media/tablet@2x.png": "/CRA-Starter/static/media/tablet@2x.5b48ba91deaa3a6bfdda.png",
@@ -10,10 +11,11 @@
     "static/media/mobile.png": "/CRA-Starter/static/media/mobile.01be34b0ff95ec54e79c.png",
     "index.html": "/CRA-Starter/index.html",
     "main.d31e985f.css.map": "/CRA-Starter/static/css/main.d31e985f.css.map",
-    "main.971f1f27.js.map": "/CRA-Starter/static/js/main.971f1f27.js.map"
+    "main.7915a039.js.map": "/CRA-Starter/static/js/main.7915a039.js.map",
+    "717.e050471b.chunk.js.map": "/CRA-Starter/static/js/717.e050471b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d31e985f.css",
-    "static/js/main.971f1f27.js"
+    "static/js/main.7915a039.js"
   ]
 }
