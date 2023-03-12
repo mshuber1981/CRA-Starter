@@ -6,10 +6,6 @@ import { Icon } from "@iconify/react";
 const Images = React.lazy(() => import("./Picture"));
 
 const StyledDiv = styled.div`
-  width: 40rem;
-  max-width: 95vw;
-  margin: 1rem auto 1rem auto;
-
   .icon {
     font-size: 10rem;
     margin: 0 auto;
@@ -17,13 +13,14 @@ const StyledDiv = styled.div`
 
   picture {
     width: 100%;
-    height: auto;
+    max-width: 40rem;
+    margin: 1rem auto 1rem auto;
   }
 `;
 
 const ResponsiveImages = () => {
   return (
-    <StyledDiv className="d-flex flex-column justify-content-center">
+    <StyledDiv className="d-flex flex-column justify-content-center my-2">
       <Suspense
         fallback={<Icon icon="mdi:picture-360-outline" className="icon" />}
       >
