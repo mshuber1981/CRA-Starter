@@ -29,20 +29,21 @@ export default function Home() {
           </Container>
         </section>
       </Element>
-      <section className="section">
-        <Element name={"scroll"} id="scroll">
+      <Element name={"scroll"} id="scroll">
+        <section className="section">
           <Title>
             <h2>Scroll to</h2>
             <div className="underline"></div>
           </Title>
-        </Element>
-        <p className="w-75">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa,
-          necessitatibus! Consequuntur, blanditiis expedita, praesentium
-          recusandae quia quos quidem quae ipsa voluptatem corporis porro?
-          Neque, in.
-        </p>
-      </section>
+
+          <p className="w-75">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa,
+            necessitatibus! Consequuntur, blanditiis expedita, praesentium
+            recusandae quia quos quidem quae ipsa voluptatem corporis porro?
+            Neque, in.
+          </p>
+        </section>
+      </Element>
       <BackToTop home={"top"} />
     </>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppContext } from "../appContext";
 import { Link, useLocation } from "react-router-dom";
+import { Link as ToLink } from "react-scroll";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 // Data
@@ -90,21 +91,52 @@ export default function NavBar({ navLinks }) {
           />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav navbarScroll className="me-auto">
-              {navLinks.map((el) => {
-                return (
-                  <Nav.Item key={el.id}>
+              {pathname === "/" ? (
+                navLinks.routes.map((el) => {
+                  return (
+                    <Nav.Item key={el.id}>
+                      <Link
+                        to={el.route}
+                        className={
+                          pathname === el.route ? "nav-link active" : "nav-link"
+                        }
+                        onClick={closeExpanded}
+                      >
+                        {el.name}
+                      </Link>
+                    </Nav.Item>
+                  );
+                })
+              ) : (
+                <>
+                  <Nav.Item>
                     <Link
-                      to={el.route}
+                      to={"/"}
                       className={
-                        pathname === el.route ? "nav-link active" : "nav-link"
+                        pathname === "/" ? "nav-link active" : "nav-link"
                       }
                       onClick={closeExpanded}
                     >
-                      {el.name}
+                      {"Home"}
                     </Link>
                   </Nav.Item>
-                );
-              })}
+                  {navLinks.to.map((el) => {
+                    return (
+                      <Nav.Item key={el.id}>
+                        <ToLink
+                          to={el.to}
+                          spy={true}
+                          activeClass="active"
+                          className="nav-link"
+                          onClick={closeExpanded}
+                        >
+                          {el.name}
+                        </ToLink>
+                      </Nav.Item>
+                    );
+                  })}
+                </>
+              )}
             </Nav>
             <Nav>
               <ThemeToggle />
@@ -117,5 +149,5 @@ export default function NavBar({ navLinks }) {
 }
 
 NavBar.propTypes = {
-  navLinks: PropTypes.arrayOf(PropTypes.object),
+  navLinks: PropTypes.object,
 };

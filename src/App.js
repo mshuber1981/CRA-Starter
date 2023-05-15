@@ -32,18 +32,21 @@ const themes = {
     background: "#27272A",
   },
 };
-const navLinks = [
-  {
-    id: 1,
-    name: "Home",
-    route: "/",
+
+const navLinks = {
+  routes: [
+    { id: 1, name: "Home", route: "/" },
+    { id: 2, name: "Route 1", route: "/Route1" },
+  ],
+  to: [
+    { id: 1, name: "Route 1", to: "top" },
+    { id: 2, name: "Scroll To", to: "scroll" },
+  ],
+  more: {
+    set: false,
+    items: [{ name: "name", path: "path" }],
   },
-  {
-    id: 2,
-    name: "Route 1",
-    route: "/Route1",
-  },
-];
+};
 
 export default function App() {
   const { theme, setTheme } = useAppContext();
