@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { useAppContext } from "../appContext";
 import { useSelector } from "react-redux";
 import { selectData } from "./homeSlice";
+import { useErrorBoundary } from "react-error-boundary";
 // Components
 import { Title, Loading } from "../components/globalStyledComponents";
 import ResponsiveImages from "../components/ResponsiveImages";
@@ -10,6 +12,7 @@ import { Button, Container } from "react-bootstrap";
 export default function Home() {
   const { theme, toggleTheme } = useAppContext();
   const data = useSelector(selectData);
+  const { showBoundary } = useErrorBoundary();
 
   React.useEffect(() => {
     const updateTitle = () =>
@@ -41,6 +44,18 @@ export default function Home() {
             onClick={toggleTheme}
           >
             Themed Button
+          </Button>
+          <br />
+          <Button
+            className="my-3"
+            onClick={() =>
+              showBoundary({
+                name: "Error",
+                message: "Simulated error message",
+              })
+            }
+          >
+            Simulate Error Boundary
           </Button>
           <br />
           <Loading />
