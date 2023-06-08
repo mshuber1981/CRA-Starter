@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 // https://create-react-app.dev/docs/adding-bootstrap
 import "bootstrap/dist/css/bootstrap.css";
+import ErrorBoundary from "./components/ErrorBoundary";
 import App from "./App";
 
 // https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
@@ -15,7 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <AppProvider>
-      <App />
+      <ErrorBoundary fallback={<p>Something went wrong</p>}>
+        <App />
+      </ErrorBoundary>
     </AppProvider>
   </Provider>
 );
