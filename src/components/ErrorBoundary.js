@@ -4,7 +4,7 @@ import React from "react";
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: true, errorState: "" };
+    this.state = { hasError: false, errorState: "" };
   }
 
   static getDerivedStateFromError(error) {
