@@ -9,12 +9,11 @@ Variables
 ===============
 */
 :root {
-  --primary-light: #b0edfd;
-  /* Primary Color */
-  --primary: ${primary};
-  --primary-dark: #316e7e;
-  --nav-height: 61px;
-  --min-footer-height: 11vh;
+  --primary-color: ${primary};
+  --dark-text-color: #212529;
+  --light-text-color: #dee2e6;
+  --hover-color: rgba(33, 37, 41, 0.5);
+  --nav-height: 55px;
   --transition: all 0.3s linear;
 }
 
@@ -23,46 +22,58 @@ Variables
 Global Styles
 ===============
 */
-body {
-  background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.color};
+main {
+  min-height: calc(100vh - 2 * var(--nav-height) - 1.5rem);
 }
 
-a:hover {
-  cursor: pointer;
+section {
+  margin: 0.5rem 0;
 }
 
 .navbar {
-  border-bottom: 1px solid ${primary};
-}
+  height: var(--nav-height);
+  background: var(--primary-color);
 
-.link-icons {
-  line-height: 0;
-  font-size: 2.25rem;
-  transition: var(--transition);
-  color: ${({ theme }) => theme.color};
+  .container {
+    background: var(--primary-color);
 
-  &:hover {
-        color: var(--primary);
+    .nav-img {
+      background: var(--bs-body-color);
+    }
+
+    .nav-link {
+      color: var(--dark-text-color);
+
+      &:hover {
+        color: var(--hover-color);
       }
+    }
+
+    .nav-link.active {
+      font-weight: bold;
+    }
+  }
 }
 
-img:not(.nav-logo) {
-  width: 100%;
-  height: auto;
-  display: block;
+:not(.btn-check) + .btn:active {
+  background-color: var(--bs-emphasis-color);
+  border: 1px solid var(--primary-color);
+  color: var(--bs-body-bg);
 }
 
-.section {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: var(--nav-height) 0;
-}
+.btn-primary {
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--bs-body-color);
+    margin: 0.25rem 0;
 
-.title {
-    font-family: "Permanent Marker";
-}
+    &:hover {
+      background-color: var(--bs-body-bg);
+      border: 1px solid var(--primary-color);
+      color: var(--bs-body-color);
+    }
+  }
+
 `;
 
 export default GlobalStyles;
