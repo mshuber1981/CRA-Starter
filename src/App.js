@@ -6,7 +6,6 @@ import { selectMode, setMode } from "./appSlice";
 import { HashRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
-import Route1 from "./pages/Route1";
 import NotFound from "./pages/NotFound";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
@@ -17,16 +16,7 @@ import { Container } from "react-bootstrap";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 // Data
-import { navLogo } from "./data";
-
-// #region constants
-const navLinks = {
-  routes: [
-    { id: 1, name: "Home", route: "/" },
-    { id: 2, name: "Route 1", route: "/Route1" },
-  ],
-};
-// #endregion
+import { navLogo, navRoutes, socials } from "./data";
 
 // #region functions
 const getStoredTheme = () => localStorage.getItem("theme");
@@ -66,17 +56,25 @@ const App = () => {
         <HashRouter>
           <>
             <GlobalStyles />
-            <NavBar navLinks={navLinks} navLogo={navLogo} />
+            <NavBar navRoutes={navRoutes} navLogo={navLogo} />
             <main>
               <Container>
                 <Routes>
                   <Route exact path="/" element={<Home />} />
-                  <Route path="/Route1" element={<Route1 />} />
+                  {navRoutes.map((element) => {
+                    return (
+                      <Route
+                        key={element.id}
+                        path={element.route}
+                        element={element.page}
+                      />
+                    );
+                  })}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Container>
             </main>
-            <Footer />
+            <Footer socials={socials} />
           </>
         </HashRouter>
       </ThemeProvider>
