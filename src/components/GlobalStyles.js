@@ -30,6 +30,7 @@ section {
   margin: 0.5rem 0;
 }
 
+/* Navbar */
 .navbar {
   height: var(--nav-height);
   background: var(--primary-color);
@@ -55,6 +56,7 @@ section {
   }
 }
 
+/* Buttons */
 :not(.btn-check) + .btn:active {
   background-color: var(--bs-emphasis-color);
   border: 1px solid var(--primary-color);
@@ -62,18 +64,17 @@ section {
 }
 
 .btn-primary {
-    background: var(--primary-color);
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--bs-body-color);
+  margin: 0.25rem 0;
+
+  &:hover {
+    background-color: var(--bs-body-bg);
     border: 1px solid var(--primary-color);
     color: var(--bs-body-color);
-    margin: 0.25rem 0;
-
-    &:hover {
-      background-color: var(--bs-body-bg);
-      border: 1px solid var(--primary-color);
-      color: var(--bs-body-color);
-    }
   }
-
+}
 `;
 
 export default GlobalStyles;
