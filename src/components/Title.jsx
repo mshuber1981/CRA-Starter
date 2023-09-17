@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 // #region styled-components
 const TitleDiv = styled.div`
   display: inline-block;
-  margin: 0.5rem auto 0 auto;
+  max-width: 90vw;
+  word-wrap: break-word;
+  margin: 0 auto 0 auto;
   text-align: center;
 
   .underline {
