@@ -1,9 +1,17 @@
 import React from "react";
 // Components
 import { Button, Spinner } from "react-bootstrap";
+// Data
+import { homeRouteName } from "../data";
+// Utils
+import { updateTitle } from "../util";
 
 // #region component
 const Home = () => {
+  React.useEffect(() => {
+    updateTitle(homeRouteName);
+  }, []);
+
   return (
     <section>
       <h1>h1</h1>
