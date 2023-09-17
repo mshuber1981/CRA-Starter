@@ -1,153 +1,118 @@
 import React from "react";
-import { useAppContext } from "../appContext";
-import { Link, useLocation } from "react-router-dom";
-import { Link as ToLink } from "react-scroll";
-import styled from "styled-components";
 import PropTypes from "prop-types";
-// Data
-import { navLogo } from "../data";
-// Icons
-import { Icon } from "@iconify/react";
+// State
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsExpanded, closeExpanded, toggleExpanded } from "../appSlice";
+// Routing
+import { Link, useLocation } from "react-router-dom";
+// Styles
+import styled from "styled-components";
+// Media
+import Logo from "../media/logo192.png";
 // Components
 import { Container, Nav, Navbar } from "react-bootstrap";
+import ThemeToggle from "./ThemeToggle";
 
-// Theme Toggle
-const StyledSwitch = styled.label`
-  /* Slider pill */
-  display: flex;
-  width: 3.2rem;
-  font-size: 1.5rem;
-  border-radius: 30px;
-  transition: var(--transition);
-  border: 2px solid;
-
-  /* Hide defualt checkbox */
-  input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    opacity: 0;
-  }
-
-  /* Move span when checked */
-  input[type="checkbox"]:checked + div {
-    transform: translateX(100%);
-  }
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--transition);
-  }
-`;
-
-// Spacer for fixed Navigation bar
+// #region styled-components
 const FixedNavSpacer = styled.div`
   height: var(--nav-height);
 `;
+// #endregion
 
-function ThemeToggle() {
-  const { theme, toggleTheme, closeExpanded } = useAppContext();
+// #region component
+const propTypes = {
+  navRoutes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      route: PropTypes.string.isRequired,
+      page: PropTypes.element.isRequired,
+    })
+  ).isRequired,
+  navLogo: PropTypes.node.isRequired,
+  navCloseDelay: PropTypes.number.isRequired,
+};
+const defaultProps = { navLogo: Logo, navCloseDelay: 125 };
 
-  return (
-    <StyledSwitch onClick={closeExpanded}>
-      <input
-        type="checkbox"
-        aria-label={`Toggle theme, currently ${theme}.`}
-        onClick={toggleTheme}
-      />
-      <div>
-        {theme === "light" ? (
-          <Icon icon="game-icons:sunflower" />
-        ) : (
-          <Icon icon="game-icons:moon" />
-        )}
-      </div>
-    </StyledSwitch>
-  );
-}
-
-export default function NavBar({ navLinks }) {
-  const { theme, isExpanded, toggleExpanded, closeExpanded } = useAppContext();
+const NavBar = ({ navLogo, navRoutes, navCloseDelay }) => {
+  const isExpanded = useSelector(selectIsExpanded);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <>
       <FixedNavSpacer />
       <Navbar
         id="nav"
+        data-bs-theme="light"
         collapseOnSelect={true}
         expand="xl"
         expanded={isExpanded}
-        bg={theme === "light" ? "light" : "dark"}
-        variant={theme === "light" ? "light" : "dark"}
         fixed="top"
       >
         <Container>
-          <Navbar.Brand>{navLogo}</Navbar.Brand>
+          <Navbar.Brand>
+            <img
+              src={navLogo}
+              width="30"
+              height="30"
+              className="d-inline-block align-top rounded-circle nav-img"
+              alt="Logo"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="responsive-navbar-nav"
-            onClick={toggleExpanded}
+            onClick={() => dispatch(toggleExpanded())}
           />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav navbarScroll className="me-auto">
-              {pathname === "/" ? (
-                navLinks.routes.map((el) => {
-                  return (
-                    <Nav.Item key={el.id}>
-                      <Link
-                        to={el.route}
-                        className={
-                          pathname === el.route ? "nav-link active" : "nav-link"
-                        }
-                        onClick={closeExpanded}
-                      >
-                        {el.name}
-                      </Link>
-                    </Nav.Item>
-                  );
-                })
-              ) : (
-                <>
-                  <Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/"
+                  className={pathname === "/" ? "nav-link active" : "nav-link"}
+                  onClick={() => {
+                    setTimeout(() => {
+                      dispatch(closeExpanded());
+                    }, navCloseDelay);
+                  }}
+                >
+                  Home
+                </Link>
+              </Nav.Item>
+              {navRoutes.map((element) => {
+                return (
+                  <Nav.Item key={element.id}>
                     <Link
-                      to={"/"}
+                      to={element.route}
                       className={
-                        pathname === "/" ? "nav-link active" : "nav-link"
+                        pathname === element.route
+                          ? "nav-link active"
+                          : "nav-link"
                       }
-                      onClick={closeExpanded}
+                      onClick={() => {
+                        setTimeout(() => {
+                          dispatch(closeExpanded());
+                        }, navCloseDelay);
+                      }}
                     >
-                      {"Home"}
+                      {element.name}
                     </Link>
                   </Nav.Item>
-                  {navLinks.to.map((el) => {
-                    return (
-                      <Nav.Item key={el.id}>
-                        <ToLink
-                          to={el.to}
-                          spy={true}
-                          activeClass="active"
-                          className="nav-link"
-                          onClick={closeExpanded}
-                        >
-                          {el.name}
-                        </ToLink>
-                      </Nav.Item>
-                    );
-                  })}
-                </>
-              )}
+                );
+              })}
             </Nav>
             <Nav>
-              <ThemeToggle />
+              <ThemeToggle closeDelay={navCloseDelay} />
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
   );
-}
-
-NavBar.propTypes = {
-  navLinks: PropTypes.object,
 };
+
+NavBar.propTypes = propTypes;
+NavBar.defaultProps = defaultProps;
+// #endregion
+
+export default NavBar;
