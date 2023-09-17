@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// #region initial state
 const initialState = {
   mode: null,
   isExpanded: false,
 };
+// #endregion
 
+// #region functions
 const setStoredTheme = (theme) => localStorage.setItem("theme", theme);
 const setTheme = (theme) => {
   if (
@@ -16,7 +19,9 @@ const setTheme = (theme) => {
     document.documentElement.setAttribute("data-bs-theme", theme);
   }
 };
+// #endregion
 
+// #region slice
 export const appSlice = createSlice({
   name: "app",
   initialState,
@@ -38,11 +43,12 @@ export const appSlice = createSlice({
     },
   },
 });
+// #endregion
 
+// state selectors
 export const selectMode = (state) => state.app.mode;
-
 export const selectIsExpanded = (state) => state.app.isExpanded;
-
+// actions
 export const { closeExpanded, setMode, toggleMode, toggleExpanded } =
   appSlice.actions;
 
