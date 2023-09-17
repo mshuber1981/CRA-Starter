@@ -27,13 +27,18 @@ const TitleDiv = styled.div`
 const propTypes = {
   size: PropTypes.oneOf(["h1", "h2"]),
   text: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 const defaultProps = { size: "h1" };
 
-const Title = ({ size, text }) => {
+const Title = ({ size, text, className }) => {
   return (
     <TitleDiv>
-      {size === "h1" ? <h1>{text}</h1> : <h2>{text}</h2>}
+      {size === "h1" ? (
+        <h1 className={className}>{text}</h1>
+      ) : (
+        <h2 className={className}>{text}</h2>
+      )}
       <div className="underline" />
     </TitleDiv>
   );
