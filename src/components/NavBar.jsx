@@ -21,6 +21,8 @@ const FixedNavSpacer = styled.div`
 
 // #region component
 const propTypes = {
+  homeRouteName: PropTypes.string.isRequired,
+  navLogo: PropTypes.node.isRequired,
   navRoutes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -29,10 +31,13 @@ const propTypes = {
       page: PropTypes.element.isRequired,
     })
   ).isRequired,
-  navLogo: PropTypes.node.isRequired,
   navCloseDelay: PropTypes.number.isRequired,
 };
-const defaultProps = { navLogo: Logo, navCloseDelay: 125 };
+const defaultProps = {
+  homeRouteName: "Home",
+  navLogo: Logo,
+  navCloseDelay: 125,
+};
 
 const NavBar = ({ navLogo, navRoutes, navCloseDelay }) => {
   const isExpanded = useSelector(selectIsExpanded);

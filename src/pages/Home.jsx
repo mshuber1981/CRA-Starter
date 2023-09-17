@@ -9,7 +9,7 @@ import { updateTitle } from "../util";
 // #region component
 const Home = () => {
   React.useEffect(() => {
-    updateTitle(homeRouteName);
+    homeRouteName ? updateTitle(homeRouteName) : updateTitle("Home");
   }, []);
 
   return (

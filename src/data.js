@@ -8,6 +8,7 @@ export const primary = "#61DBFB";
 export const navLogo = undefined;
 
 // Navbar routes
+export const homeRouteName = undefined;
 export const navRoutes = [
   { id: 0, name: "Route 1", route: "/Route1", page: <Route1 /> },
 ];

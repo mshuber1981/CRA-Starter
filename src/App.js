@@ -16,7 +16,7 @@ import { Container } from "react-bootstrap";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 // Data
-import { navLogo, navRoutes, socials } from "./data";
+import { navLogo, homeRouteName, navRoutes, socials } from "./data";
 
 // #region functions
 const getStoredTheme = () => localStorage.getItem("theme");
@@ -56,7 +56,11 @@ const App = () => {
         <HashRouter>
           <>
             <GlobalStyles />
-            <NavBar navRoutes={navRoutes} navLogo={navLogo} />
+            <NavBar
+              navLogo={navLogo}
+              homeRouteName={homeRouteName}
+              navRoutes={navRoutes}
+            />
             <main>
               <Container>
                 <Routes>
