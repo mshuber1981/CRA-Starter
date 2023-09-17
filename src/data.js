@@ -1,17 +1,14 @@
-// Icons
-import { Icon } from "@iconify/react";
+/* Colors
+ **************************************************************
+ */
+export const primary = "#61DBFB";
 
 /* Navigation Logo
  **************************************************************
  */
-export const navLogo = <Icon icon="logos:react" />;
+export const navLogo = undefined;
 
 /* GitHub
  **************************************************************
  */
 export const githubUsername = "mshuber1981";
-
-/* Colors
- **************************************************************
- */
-export const primary = "#61DBFB";
