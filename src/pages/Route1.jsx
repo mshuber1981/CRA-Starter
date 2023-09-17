@@ -10,7 +10,7 @@ const Route1 = () => {
 
   React.useEffect(() => {
     updateTitle(pathname.substring(1));
-  }, []);
+  }, [pathname]);
 
   return (
     <section>
