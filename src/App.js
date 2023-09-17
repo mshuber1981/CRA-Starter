@@ -12,7 +12,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import AppFallBack from "./old/components/AppFallBack";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./components/GlobalStyles";
-import { Container } from "react-bootstrap";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 // Data
@@ -62,21 +61,21 @@ const App = () => {
               navRoutes={navRoutes}
             />
             <main>
-              <Container>
-                <Routes>
-                  <Route exact path="/" element={<Home />} />
-                  {navRoutes.map((element) => {
-                    return (
-                      <Route
-                        key={element.id}
-                        path={element.route}
-                        element={element.page}
-                      />
-                    );
-                  })}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Container>
+              {/* <Container> */}
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                {navRoutes.map((element) => {
+                  return (
+                    <Route
+                      key={element.id}
+                      path={element.route}
+                      element={element.page}
+                    />
+                  );
+                })}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              {/* </Container> */}
             </main>
             <Footer socials={socials} />
           </>
