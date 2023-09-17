@@ -1,34 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 // Components
-import { Title } from "../components/globalStyledComponents";
+import Title from "../components/Title";
 import { Container } from "react-bootstrap";
+// Utils
+import { updateTitle } from "../util";
 
-const StyledNotFound = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - var(--nav-height));
+// #region styled-components
+const StyledSection = styled.section`
+  .container {
+    min-height: calc(100vh - 2 * var(--nav-height) - 2rem);
+  }
 `;
+// #endregion
 
-export default function NotFound() {
+// #region component
+const NotFound = () => {
   React.useEffect(() => {
-    const updateTitle = () => (document.title = "404");
-    updateTitle();
+    updateTitle("Not Found...");
   }, []);
 
   return (
-    <>
-      <StyledNotFound>
-        <Container className="d-flex">
-          <Title>
-            <h2 className="display-1">404</h2>
-            <div className="underline"></div>
-          </Title>
-        </Container>
-        <p className="text-center display-6">Sorry, page not found...</p>
-      </StyledNotFound>
-    </>
+    <StyledSection>
+      <Container className="d-flex flex-column justify-content-center">
+        <Title text={"404"} className={"display-1"} />
+        <p className="display-6 text-center">Sorry, page not found...</p>
+      </Container>
+    </StyledSection>
   );
-}
+};
+// #endregion
+
+export default NotFound;
