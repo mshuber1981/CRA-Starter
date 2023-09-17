@@ -15,6 +15,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./components/GlobalStyles";
 import { Container } from "react-bootstrap";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 // Data
 import { navLogo } from "./data";
 
@@ -75,6 +76,7 @@ const App = () => {
                 </Routes>
               </Container>
             </main>
+            <Footer />
           </>
         </HashRouter>
       </ThemeProvider>
