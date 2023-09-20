@@ -4,31 +4,11 @@ import PropTypes from "prop-types";
 // Icons
 import { Icon } from "@iconify/react";
 
-// #region constants
-
-// #endregion
-
 // #region styled-components
 const StyledFooter = styled.footer`
   height: calc(var(--nav-height) + 1rem);
   background: var(--primary-color);
-
-  .link-icons {
-    line-height: 0;
-    font-size: 2.25rem;
-    margin: 0 1rem;
-    transition: var(--transition);
-    color: var(--dark-text-color);
-
-    &:hover {
-      color: var(--hover-color);
-    }
-  }
 `;
-// #endregion
-
-// #region functions
-
 // #endregion
 
 // #region component
@@ -43,9 +23,6 @@ const propTypes = {
   ).isRequired,
 };
 
-/**
- *
- */
 const Footer = ({ socials }) => {
   return (
     <StyledFooter
