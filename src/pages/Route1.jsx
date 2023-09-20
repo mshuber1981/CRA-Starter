@@ -21,6 +21,7 @@ const Route1 = () => {
         <Title text={"Route 1 h1 Title"} />
         <br />
         <Title size={"h2"} text={"Route 1 h2 Title"} />
+        <br />
         <Title
           size={"h2"}
           text={"Really Loooooooooooooooooooooooooooooong title"}
