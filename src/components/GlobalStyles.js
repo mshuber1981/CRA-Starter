@@ -75,6 +75,19 @@ section {
     color: var(--bs-body-color);
   }
 }
+
+/* Link Icons */
+.link-icons {
+    line-height: 0;
+    font-size: 2.25rem;
+    margin: 0 1rem;
+    transition: var(--transition);
+    color: var(--dark-text-color);
+
+    &:hover {
+      color: var(--hover-color);
+    }
+  }
 `;
 
 export default GlobalStyles;
