@@ -14,6 +14,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./components/GlobalStyles";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
 // Data
 import { navLogo, homeRouteName, navRoutes, socials } from "./data";
 
@@ -78,6 +79,7 @@ const App = () => {
               {/* </Container> */}
             </main>
             <Footer socials={socials} />
+            <BackToTop />
           </>
         </HashRouter>
       </ThemeProvider>
