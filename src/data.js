@@ -1,8 +1,5 @@
-// Pages
+// Routes
 import Route1 from "./pages/Route1";
-
-// Primary color
-export const primary = "#61DBFB";
 
 // Navbar logo
 export const navLogo = undefined;
