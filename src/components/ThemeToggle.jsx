@@ -1,10 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-// State
-import { useDispatch, useSelector } from "react-redux";
-import { closeExpanded, selectMode, toggleMode } from "../appSlice";
-// Styles
 import styled from "styled-components";
+import PropTypes from "prop-types";
 // Icons
 import { Icon } from "@iconify/react";
 
@@ -16,9 +12,8 @@ const StyledSwitch = styled.label`
   width: 3.2rem;
   font-size: 1.5rem;
   border-radius: 30px;
-  transition: var(--transition);
-  border: 2px solid var(--dark-text-color);
-  background-color: var(--hover-color);
+  border: 2px solid;
+  background: var(--bs-body-bg);
 
   /* Hide defualt checkbox */
   input[type="checkbox"] {
@@ -36,34 +31,42 @@ const StyledSwitch = styled.label`
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: var(--transition);
-    color: var(--light-text-color);
   }
 `;
 // #endregion
 
+// #region functions
+const setStoredTheme = (theme) => localStorage.setItem("theme", theme);
+// #endregion
+
 // #region component
 const propTypes = {
-  closeDelay: PropTypes.number.isRequired,
+  closeDelay: PropTypes.number,
+  setExpanded: PropTypes.func.isRequired,
+  setTheme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
 };
 const defaultProps = { closeDelay: 250 };
 
-const ThemeToggle = ({ closeDelay }) => {
-  const dispatch = useDispatch();
-  const theme = useSelector(selectMode);
+const ThemeToggle = ({ closeDelay, setExpanded, setTheme, theme }) => {
+  const toggleTheme = () => {
+    const themType = theme === "light" ? "dark" : "light";
+    setTheme(themType);
+    setStoredTheme(themType);
+  };
 
   return (
     <StyledSwitch
       onClick={() => {
         setTimeout(() => {
-          dispatch(closeExpanded());
+          setExpanded(false);
         }, closeDelay);
       }}
     >
       <input
         type="checkbox"
         aria-label={`Toggle theme, currently ${theme}.`}
-        onClick={() => dispatch(toggleMode())}
+        onClick={() => toggleTheme()}
       />
       <div>
         {theme === "light" ? (

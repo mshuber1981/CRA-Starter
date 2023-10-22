@@ -1,4 +1,5 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
 // State
 import { useDispatch, useSelector } from "react-redux";
 import { selectMode, setMode } from "./appSlice";
@@ -9,8 +10,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 // Components
 import { ErrorBoundary } from "react-error-boundary";
-import AppFallBack from "./old/components/AppFallBack";
-import { ThemeProvider } from "styled-components";
+import AppFallBack from "./components/AppFallback";
 import GlobalStyles from "./components/GlobalStyles";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -18,37 +18,10 @@ import BackToTop from "./components/BackToTop";
 // Data
 import { navLogo, homeRouteName, navRoutes, socials } from "./data";
 
-// #region functions
-const getStoredTheme = () => localStorage.getItem("theme");
-const getPreferredTheme = () => {
-  const storedTheme = getStoredTheme();
-  if (storedTheme) {
-    return storedTheme;
-  }
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-};
-// #endregion
-
 // #region component
 const App = () => {
   const dispatch = useDispatch();
   const theme = useSelector(selectMode);
-
-  React.useEffect(() => {
-    dispatch(setMode(getPreferredTheme()));
-  }, [dispatch]);
-
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme !== "light" && storedTheme !== "dark") {
-        dispatch(setMode(getPreferredTheme()));
-      }
-    });
 
   return (
     <ErrorBoundary FallbackComponent={AppFallBack}>
@@ -57,12 +30,12 @@ const App = () => {
           <>
             <GlobalStyles />
             <NavBar
-              navLogo={navLogo}
-              homeRouteName={homeRouteName}
-              navRoutes={navRoutes}
+              callBack={(theme) => dispatch(setMode(theme))}
+              homRouteName={homeRouteName}
+              logo={navLogo}
+              routes={navRoutes}
             />
             <main>
-              {/* <Container> */}
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 {navRoutes.map((element) => {
@@ -76,7 +49,6 @@ const App = () => {
                 })}
                 <Route path="*" element={<NotFound />} />
               </Routes>
-              {/* </Container> */}
             </main>
             <Footer socials={socials} />
             <BackToTop />

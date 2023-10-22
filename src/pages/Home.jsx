@@ -1,4 +1,5 @@
 import React from "react";
+import { useErrorBoundary } from "react-error-boundary";
 // Components
 import {
   Accordion,
@@ -6,16 +7,19 @@ import {
   Badge,
   Button,
   ButtonGroup,
+  Card,
   Container,
   Dropdown,
   DropdownButton,
   Stack,
-  Spinner,
 } from "react-bootstrap";
-// Data
-import { homeRouteName } from "../data";
+import Title from "../components/Title";
+// Media
+import Logo from "../media/logo192.png";
 // Utils
 import { updateTitle } from "../util";
+// Data
+import { homeRouteName } from "../data";
 
 // #region constants
 const variants = [
@@ -32,6 +36,8 @@ const variants = [
 
 // #region component
 const Home = () => {
+  const { showBoundary } = useErrorBoundary();
+
   React.useEffect(() => {
     homeRouteName ? updateTitle(homeRouteName) : updateTitle("Home");
   }, []);
@@ -39,14 +45,28 @@ const Home = () => {
   return (
     <section>
       <Container>
-        <h1>h1</h1>
+        <Title text={"Themed h1 title"} />
         <h2>h2</h2>
         <h3>h3</h3>
         <h4>h4</h4>
         <h5>h5</h5>
         <h5>h6</h5>
         <p>p</p>
-        <Accordion defaultActiveKey="0">
+        <Button
+          className=""
+          onClick={() =>
+            showBoundary({
+              name: "Error",
+              message: "Simulated error message",
+            })
+          }
+        >
+          Simulate Error Boundary
+        </Button>
+        <Container className="d-flex justify-content-center">
+          <Title size={"h2"} text={"Accordion"} />
+        </Container>
+        <Accordion className="my-2" defaultActiveKey="0">
           <Accordion.Item eventKey="0">
             <Accordion.Header>Accordion Item #1</Accordion.Header>
             <Accordion.Body>
@@ -72,12 +92,14 @@ const Home = () => {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
+        <Title size={"h2"} text={"Alerts"} />
         {variants.map((variant) => (
           <Alert key={variant} variant={variant}>
             This is a {variant} alert—check it out!
           </Alert>
         ))}
-        <Stack direction="horizontal" gap={2} className="mb-1">
+        <Title size={"h2"} text={"Badges"} />
+        <Stack direction="horizontal" gap={2} className="my-2">
           {variants.map((variant) =>
             variant === "light" ? (
               <Badge key={variant} bg={variant} text="dark">
@@ -90,7 +112,8 @@ const Home = () => {
             )
           )}
         </Stack>
-        <Stack direction="vertical" gap={2} className="w-25 mb-1">
+        <Title size={"h2"} text={"Button Group"} />
+        <Stack direction="vertical" gap={2} className="w-25 my-2">
           {variants.map((variant) => (
             <ButtonGroup key={variant}>
               <Button variant={variant}>{variant} button group</Button>
@@ -106,11 +129,30 @@ const Home = () => {
             </ButtonGroup>
           ))}
         </Stack>
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-        <br />
-        <Button>Primary</Button>
+        <Title size={"h2"} text={"Buttons"} />
+        <Stack direction="horizontal" gap={2} className="my-2">
+          <Button variant="primary">Primary</Button>{" "}
+          <Button variant="secondary">Secondary</Button>{" "}
+          <Button variant="success">Success</Button>{" "}
+          <Button variant="warning">Warning</Button>{" "}
+          <Button variant="danger">Danger</Button>{" "}
+          <Button variant="info">Info</Button>{" "}
+          <Button variant="light">Light</Button>{" "}
+          <Button variant="dark">Dark</Button>
+          <Button variant="link">Link</Button>
+        </Stack>
+        <Title size={"h2"} text={"Cards"} />
+        <Card className="object-fit-cover my-2" style={{ width: "18rem" }}>
+          <Card.Img variant="top" src={Logo} />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+          </Card.Body>
+        </Card>
       </Container>
     </section>
   );

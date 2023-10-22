@@ -7,7 +7,6 @@ import { Icon } from "@iconify/react";
 // #region styled-components
 const StyledFooter = styled.footer`
   height: calc(var(--nav-height) + 1rem);
-  background: var(--primary-color);
 `;
 // #endregion
 
@@ -25,10 +24,7 @@ const propTypes = {
 
 const Footer = ({ socials }) => {
   return (
-    <StyledFooter
-      className="d-flex align-items-center justify-content-center p-2"
-      data-bs-theme="light"
-    >
+    <StyledFooter className="d-flex align-items-center justify-content-center p-2 bg-primary">
       {socials.map((element) => {
         return (
           <a

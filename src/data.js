@@ -1,4 +1,5 @@
 // Routes
+import ResponsiveImages from "./pages/ResponsiveImages";
 import Route1 from "./pages/Route1";
 
 // Navbar logo
@@ -7,7 +8,13 @@ export const navLogo = undefined;
 // Navbar routes
 export const homeRouteName = undefined;
 export const navRoutes = [
-  { id: 0, name: "Route 1", route: "/Route1", page: <Route1 /> },
+  {
+    id: 0,
+    name: "Responsive Images",
+    route: "/ResponsiveImages",
+    page: <ResponsiveImages />,
+  },
+  { id: 1, name: "Route 1", route: "/Route1", page: <Route1 /> },
 ];
 
 // Social media
