@@ -1,5 +1,5 @@
 import React from "react";
-// Images
+// Media
 import mobile from "../media/mobile.png";
 import mobile2x from "../media/mobile@2x.png";
 import tablet from "../media/tablet.png";
@@ -13,7 +13,12 @@ const Picture = () => {
       <source media="(max-width: 420px)" srcSet={`${mobile}, ${mobile2x}`} />
       <source media="(max-width: 820px)" srcSet={`${tablet}, ${tablet2x}`} />
       <source srcSet={`${desktop}, ${desktop2x}`} />
-      <img src={desktop} alt="Desktop computer icon" loading="lazy" />
+      <img
+        src={desktop}
+        alt="Desktop computer icon"
+        loading="lazy"
+        className="img-fluid"
+      />
     </picture>
   );
 };

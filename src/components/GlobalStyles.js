@@ -1,6 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-// Data
-import { primary } from "../data";
 
 const GlobalStyles = createGlobalStyle`
 /*
@@ -9,13 +7,7 @@ Variables
 ===============
 */
 :root {
-  --primary-light: #b0edfd;
-  /* Primary Color */
-  --primary: ${primary};
-  --primary-dark: #316e7e;
-  --nav-height: 61px;
-  --min-footer-height: 11vh;
-  --transition: all 0.3s linear;
+  --nav-height: 55px;
 }
 
 /*
@@ -23,46 +15,27 @@ Variables
 Global Styles
 ===============
 */
-body {
-  background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.color};
+main {
+  min-height: calc(100vh - 2 * var(--nav-height) - 1.5rem);
 }
 
-a:hover {
-  cursor: pointer;
+section {
+  margin: 0.5rem 0;
 }
 
-.navbar {
-  border-bottom: 1px solid ${primary};
-}
-
+/* Link Icons */
 .link-icons {
-  line-height: 0;
-  font-size: 2.25rem;
-  transition: var(--transition);
-  color: ${({ theme }) => theme.color};
+    line-height: 0;
+    font-size: 2.25rem;
+    margin: 0 1rem;
+    color: ${({ theme }) =>
+      theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
 
-  &:hover {
-        color: var(--primary);
-      }
-}
-
-img:not(.nav-logo) {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.section {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: var(--nav-height) 0;
-}
-
-.title {
-    font-family: "Permanent Marker";
-}
+    &:hover {
+      color: ${({ theme }) =>
+        theme.name === "light" ? "var(--bs-light)" : "var(--bs-dark)"};
+    }
+  }
 `;
 
 export default GlobalStyles;

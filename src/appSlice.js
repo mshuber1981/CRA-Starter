@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// #region initial state
 const initialState = {
   mode: "light",
 };
+// #endregion
 
+// #region slice
 export const appSlice = createSlice({
   name: "app",
   initialState,
@@ -11,12 +14,13 @@ export const appSlice = createSlice({
     setMode: (state, action) => {
       state.mode = action.payload;
     },
-    toggleMode: (state) => {
-      state.mode === "light" ? (state.mode = "dark") : (state.mode = "light");
-    },
   },
 });
+// #endregion
 
-export const { setMode, toggleMode } = appSlice.actions;
+// state selectors
+export const selectMode = (state) => state.app.mode;
+// actions
+export const { setMode } = appSlice.actions;
 
 export default appSlice.reducer;

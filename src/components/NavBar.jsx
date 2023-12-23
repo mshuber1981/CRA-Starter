@@ -1,153 +1,173 @@
 import React from "react";
-import { useAppContext } from "../appContext";
-import { Link, useLocation } from "react-router-dom";
-import { Link as ToLink } from "react-scroll";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-// Data
-import { navLogo } from "../data";
-// Icons
-import { Icon } from "@iconify/react";
+// Routing
+import { Link, useLocation } from "react-router-dom";
 // Components
 import { Container, Nav, Navbar } from "react-bootstrap";
+import ThemeToggle from "./ThemeToggle";
+// Media
+import Logo from "../media/logo192.png";
+// Utils
+import { getStoredTheme, getPreferredTheme, setTheme } from "../util";
 
-// Theme Toggle
-const StyledSwitch = styled.label`
-  /* Slider pill */
-  display: flex;
-  width: 3.2rem;
-  font-size: 1.5rem;
-  border-radius: 30px;
-  transition: var(--transition);
-  border: 2px solid;
-
-  /* Hide defualt checkbox */
-  input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    opacity: 0;
+// #region styled-components
+const StyledDiv = styled.div`
+  .spacer {
+    height: ${({ $height }) => $height};
   }
-
-  /* Move span when checked */
-  input[type="checkbox"]:checked + div {
-    transform: translateX(100%);
-  }
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--transition);
+  .logo-img {
+    background: var(--bs-body-bg);
   }
 `;
+// #endregion
 
-// Spacer for fixed Navigation bar
-const FixedNavSpacer = styled.div`
-  height: var(--nav-height);
-`;
+// #region component
+const propTypes = {
+  homeRouteName: PropTypes.string,
+  callBack: PropTypes.func,
+  closeDelay: PropTypes.number.isRequired,
+  height: PropTypes.string,
+  logo: PropTypes.node,
+  routes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      route: PropTypes.string.isRequired,
+      page: PropTypes.element.isRequired,
+    })
+  ).isRequired,
+};
+const defaultProps = {
+  homeRouteName: "Home",
+  closeDelay: 125,
+  height: "55px",
+  logo: Logo,
+};
 
-function ThemeToggle() {
-  const { theme, toggleTheme, closeExpanded } = useAppContext();
-
-  return (
-    <StyledSwitch onClick={closeExpanded}>
-      <input
-        type="checkbox"
-        aria-label={`Toggle theme, currently ${theme}.`}
-        onClick={toggleTheme}
-      />
-      <div>
-        {theme === "light" ? (
-          <Icon icon="game-icons:sunflower" />
-        ) : (
-          <Icon icon="game-icons:moon" />
-        )}
-      </div>
-    </StyledSwitch>
-  );
-}
-
-export default function NavBar({ navLinks }) {
-  const { theme, isExpanded, toggleExpanded, closeExpanded } = useAppContext();
+const NavBar = ({
+  homeRouteName,
+  callBack,
+  closeDelay,
+  height,
+  logo,
+  routes,
+}) => {
+  const [isExpanded, setisExpanded] = React.useState(false);
+  const [themeState, setThemeState] = React.useState("light");
   const { pathname } = useLocation();
 
+  const setThemes = React.useCallback(
+    (theme) => {
+      if (theme) {
+        setThemeState(theme);
+        setTheme(theme);
+        if (callBack) {
+          callBack(theme);
+        }
+      } else {
+        setThemeState(getPreferredTheme());
+        setTheme(getPreferredTheme());
+        if (callBack) {
+          callBack(getPreferredTheme());
+        }
+      }
+    },
+    [setThemeState, callBack]
+  );
+
+  React.useEffect(() => {
+    setThemes();
+  }, [setThemes]);
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      const storedTheme = getStoredTheme();
+      if (storedTheme !== "light" && storedTheme !== "dark") {
+        setThemes();
+      }
+    });
+
   return (
-    <>
-      <FixedNavSpacer />
+    <StyledDiv $height={height}>
+      <div className="spacer" />
       <Navbar
         id="nav"
+        bg="primary"
         collapseOnSelect={true}
         expand="xl"
         expanded={isExpanded}
-        bg={theme === "light" ? "light" : "dark"}
-        variant={theme === "light" ? "light" : "dark"}
         fixed="top"
       >
         <Container>
-          <Navbar.Brand>{navLogo}</Navbar.Brand>
+          <Navbar.Brand>
+            <img
+              src={logo}
+              width="30"
+              height="30"
+              className={"d-inline-block align-top rounded-circle logo-img"}
+              alt="Logo"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="responsive-navbar-nav"
-            onClick={toggleExpanded}
+            onClick={() => setisExpanded(!isExpanded)}
           />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav navbarScroll className="me-auto">
-              {pathname === "/" ? (
-                navLinks.routes.map((el) => {
-                  return (
-                    <Nav.Item key={el.id}>
-                      <Link
-                        to={el.route}
-                        className={
-                          pathname === el.route ? "nav-link active" : "nav-link"
-                        }
-                        onClick={closeExpanded}
-                      >
-                        {el.name}
-                      </Link>
-                    </Nav.Item>
-                  );
-                })
-              ) : (
-                <>
-                  <Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/"
+                  className={pathname === "/" ? "nav-link active" : "nav-link"}
+                  onClick={() => {
+                    setTimeout(() => {
+                      setisExpanded(false);
+                    }, closeDelay);
+                  }}
+                >
+                  {homeRouteName}
+                </Link>
+              </Nav.Item>
+              {routes.map((element) => {
+                return (
+                  <Nav.Item key={element.id}>
                     <Link
-                      to={"/"}
+                      to={element.route}
                       className={
-                        pathname === "/" ? "nav-link active" : "nav-link"
+                        pathname === element.route
+                          ? "nav-link active"
+                          : "nav-link"
                       }
-                      onClick={closeExpanded}
+                      onClick={() => {
+                        setTimeout(() => {
+                          setisExpanded(false);
+                        }, closeDelay);
+                      }}
                     >
-                      {"Home"}
+                      {element.name}
                     </Link>
                   </Nav.Item>
-                  {navLinks.to.map((el) => {
-                    return (
-                      <Nav.Item key={el.id}>
-                        <ToLink
-                          to={el.to}
-                          spy={true}
-                          activeClass="active"
-                          className="nav-link"
-                          onClick={closeExpanded}
-                        >
-                          {el.name}
-                        </ToLink>
-                      </Nav.Item>
-                    );
-                  })}
-                </>
-              )}
+                );
+              })}
             </Nav>
             <Nav>
-              <ThemeToggle />
+              <ThemeToggle
+                closeDelay={closeDelay}
+                setExpanded={setisExpanded}
+                setTheme={setThemes}
+                theme={themeState}
+              />
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
+    </StyledDiv>
   );
-}
-
-NavBar.propTypes = {
-  navLinks: PropTypes.object,
 };
+
+NavBar.propTypes = propTypes;
+NavBar.defaultProps = defaultProps;
+// #endregion
+
+export default NavBar;
