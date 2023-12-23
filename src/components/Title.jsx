@@ -26,7 +26,6 @@ const TitleDiv = styled.div`
 
 // #region component
 const propTypes = {
-  className: PropTypes.string,
   size: PropTypes.oneOf(["h1", "h2"]),
   text: PropTypes.string.isRequired,
 };
