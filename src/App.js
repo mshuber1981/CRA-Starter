@@ -16,7 +16,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 // Data
-import { navLogo, homeRouteName, navRoutes, socials } from "./data";
+import { navLogo, homeRouteName, navRoutes, socials } from "./config";
 
 // #region component
 const App = () => {

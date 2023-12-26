@@ -1,6 +1,9 @@
 // Routes
 import ResponsiveImages from "./pages/ResponsiveImages";
 
+// GitHub username
+export const gitHubUsername = "mshuber1981";
+
 // Navbar logo
 export const navLogo = undefined;
 
@@ -30,6 +33,3 @@ export const socials = [
     icon: "fa-brands:free-code-camp",
   },
 ];
-
-// GitHub username
-export const gitHubUsername = "mshuber1981";
