@@ -20,7 +20,7 @@ main {
 }
 
 section {
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 
 /* Link Icons */
