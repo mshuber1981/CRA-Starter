@@ -18,7 +18,7 @@ const AppFallback = ({ error }) => {
 
   return (
     <main className="d-flex flex-column justify-content-center align-items-center vh-100">
-      <Container>
+      <Container className="text-center">
         <p>Something went wrong:</p>
         <pre style={{ color: "red" }}>{`${error.name}: ${error.message}`}</pre>
         <Button onClick={resetBoundary}>Reset Error Boundary</Button>
