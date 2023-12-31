@@ -1,6 +1,10 @@
 import React from "react";
+// Styles
 import styled from "styled-components";
+// State
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { selectMode } from "../appSlice";
 // Icons
 import { Icon } from "@iconify/react";
 
@@ -44,11 +48,12 @@ const propTypes = {
   closeDelay: PropTypes.number,
   setExpanded: PropTypes.func.isRequired,
   setTheme: PropTypes.func.isRequired,
-  theme: PropTypes.string.isRequired,
 };
 const defaultProps = { closeDelay: 250 };
 
-const ThemeToggle = ({ closeDelay, setExpanded, setTheme, theme }) => {
+const ThemeToggle = ({ closeDelay, setExpanded, setTheme }) => {
+  const theme = useSelector(selectMode);
+
   const toggleTheme = () => {
     const themType = theme === "light" ? "dark" : "light";
     setTheme(themType);

@@ -1,9 +1,10 @@
 import React from "react";
+// Styles
 import { ThemeProvider } from "styled-components";
 // State
 import { useDispatch, useSelector } from "react-redux";
 import { selectMode, setMode } from "./appSlice";
-// Routing
+// Router
 import { HashRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
@@ -15,13 +16,41 @@ import GlobalStyles from "./components/GlobalStyles";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
-// Data
+// Config
 import { navLogo, homeRouteName, navRoutes, socials } from "./config";
+// Util
+import { getStoredTheme, getPreferredTheme, setTheme } from "./util";
 
 // #region component
 const App = () => {
-  const dispatch = useDispatch();
   const theme = useSelector(selectMode);
+  const dispatch = useDispatch();
+
+  const setThemes = React.useCallback(
+    (theme) => {
+      if (theme) {
+        dispatch(setMode(theme));
+        setTheme(theme);
+      } else {
+        dispatch(setMode(getPreferredTheme()));
+        setTheme(getPreferredTheme());
+      }
+    },
+    [dispatch]
+  );
+
+  React.useEffect(() => {
+    setThemes();
+  }, [setThemes]);
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      const storedTheme = getStoredTheme();
+      if (storedTheme !== "light" && storedTheme !== "dark") {
+        setThemes();
+      }
+    });
 
   return (
     <ErrorBoundary FallbackComponent={AppFallBack}>
@@ -30,7 +59,7 @@ const App = () => {
           <>
             <GlobalStyles />
             <NavBar
-              callBack={(theme) => dispatch(setMode(theme))}
+              callBack={(theme) => setThemes(theme)}
               homRouteName={homeRouteName}
               logo={navLogo}
               routes={navRoutes}
