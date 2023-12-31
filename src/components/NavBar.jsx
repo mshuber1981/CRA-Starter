@@ -1,5 +1,7 @@
 import React from "react";
+// Styles
 import styled from "styled-components";
+// State
 import PropTypes from "prop-types";
 // Routing
 import { Link, useLocation } from "react-router-dom";
@@ -8,8 +10,6 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import ThemeToggle from "./ThemeToggle";
 // Media
 import Logo from "../media/logo192.png";
-// Utils
-import { getStoredTheme, getPreferredTheme, setTheme } from "../util";
 
 // #region styled-components
 const StyledDiv = styled.div`
@@ -54,40 +54,7 @@ const NavBar = ({
   routes,
 }) => {
   const [isExpanded, setisExpanded] = React.useState(false);
-  const [themeState, setThemeState] = React.useState("light");
   const { pathname } = useLocation();
-
-  const setThemes = React.useCallback(
-    (theme) => {
-      if (theme) {
-        setThemeState(theme);
-        setTheme(theme);
-        if (callBack) {
-          callBack(theme);
-        }
-      } else {
-        setThemeState(getPreferredTheme());
-        setTheme(getPreferredTheme());
-        if (callBack) {
-          callBack(getPreferredTheme());
-        }
-      }
-    },
-    [setThemeState, callBack]
-  );
-
-  React.useEffect(() => {
-    setThemes();
-  }, [setThemes]);
-
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme !== "light" && storedTheme !== "dark") {
-        setThemes();
-      }
-    });
 
   return (
     <StyledDiv $height={height}>
@@ -155,8 +122,7 @@ const NavBar = ({
               <ThemeToggle
                 closeDelay={closeDelay}
                 setExpanded={setisExpanded}
-                setTheme={setThemes}
-                theme={themeState}
+                setTheme={callBack}
               />
             </Nav>
           </Navbar.Collapse>

@@ -2,6 +2,8 @@
     https://create-react-app.dev/docs/adding-bootstrap/#using-a-custom-theme
     https://getbootstrap.com/docs/5.3/utilities/colors/#sass-variables
 */
+
+// Set the primary color for the theme
 $blue: #61dbfb;
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
