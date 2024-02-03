@@ -17,7 +17,7 @@ const AppFallback = ({ error }) => {
   }, []);
 
   return (
-    <main className="d-flex flex-column justify-content-center align-items-center vh-100">
+    <main className="d-flex flex-column vh-100 justify-content-center align-items-center">
       <Container className="text-center">
         <p>Something went wrong:</p>
         <pre style={{ color: "red" }}>{`${error.name}: ${error.message}`}</pre>

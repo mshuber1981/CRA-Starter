@@ -1,8 +1,10 @@
 import React from "react";
-import { useErrorBoundary } from "react-error-boundary";
+// State
+import { useGetUsersQuery } from "../apiSlice";
 // Icons
 import { Icon } from "@iconify/react";
 // Components
+import { useErrorBoundary } from "react-error-boundary";
 import {
   Button,
   Card,
@@ -21,12 +23,44 @@ import { homeRouteName } from "../config";
 
 // #region component
 const Home = () => {
-  // const [index, setIndex] = React.useState(0);
   const { showBoundary } = useErrorBoundary();
+  const {
+    data: userData,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetUsersQuery();
+  const cards = [
+    {
+      title: "One",
+      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque aliquam totam asperiores!",
+    },
+    {
+      title: "Two",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti nesciunt provident minus.",
+    },
+    {
+      title: "Three",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id commodi ducimus velit!",
+    },
+  ];
 
-  // const handleSelect = (selectedIndex, e) => {
-  //   setIndex(selectedIndex);
-  // };
+  let content;
+
+  if (isLoading) {
+    content = <Spinner animation="border" variant="primary" />;
+  } else if (isSuccess) {
+    content = (
+      <p>{`My name is ${userData.name} and I have ${userData.public_repos} public GitHub repos.`}</p>
+    );
+  } else if (isError) {
+    if (error.status !== "FETCH_ERROR") {
+      content = <p>{`${error.status}: ${error.data.message}`}</p>;
+    } else {
+      content = <p>{error.status}</p>;
+    }
+  }
 
   React.useEffect(() => {
     homeRouteName ? updateTitle(homeRouteName) : updateTitle("Home");
@@ -50,7 +84,6 @@ const Home = () => {
         <Spinner className={"m-2"} animation="border" variant="primary" />
         <br />
         <Title size={"h2"} text={"Buttons"} />
-
         <Stack direction="horizontal" gap={2} className="flex-wrap my-2">
           <Button variant="primary">Primary</Button>{" "}
           <Button variant="secondary">Secondary</Button>{" "}
@@ -62,23 +95,31 @@ const Home = () => {
           <Button variant="dark">Dark</Button>
           <Button variant="link">Link</Button>
         </Stack>
-
         <Title size={"h2"} text={"Cards"} />
-        <Card className="object-fit-cover my-2" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={Logo} />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
+        <Container className="d-flex justify-content-evenly">
+          {cards.map(({ title, text }) => {
+            return (
+              <Card
+                className="object-fit-cover my-2"
+                style={{
+                  width: "20rem",
+                  background: "var(--bs-tertiary-color)",
+                }}
+              >
+                <Card.Img variant="top" src={Logo} />
+                <Card.Body>
+                  <Card.Title>{title}</Card.Title>
+                  <Card.Text>{text}</Card.Text>
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </Container>
         <Container className="d-flex justify-content-center">
           <Title size={"h2"} text={"Carousel"} />
         </Container>
-        <Carousel className="bg-primary">
+        <Carousel style={{ background: "var(--bs-tertiary-color)" }}>
           <Carousel.Item>
             <div className="d-flex justify-content-center align-items-center img-container">
               <Icon icon={"fa:github"} />
@@ -109,6 +150,8 @@ const Home = () => {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
+        <Title size={"h2"} text={"API Data"} />
+        {content}
         <Button
           className=""
           onClick={() =>
