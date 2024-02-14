@@ -9,7 +9,9 @@ import {
   Button,
   Card,
   Carousel,
+  Col,
   Container,
+  Row,
   Stack,
   Spinner,
 } from "react-bootstrap";
@@ -33,14 +35,17 @@ const Home = () => {
   } = useGetUsersQuery();
   const cards = [
     {
+      id: 1,
       title: "One",
       text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque aliquam totam asperiores!",
     },
     {
+      id: 2,
       title: "Two",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti nesciunt provident minus.",
     },
     {
+      id: 3,
       title: "Three",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id commodi ducimus velit!",
     },
@@ -96,26 +101,28 @@ const Home = () => {
           <Button variant="link">Link</Button>
         </Stack>
         <Title size={"h2"} text={"Cards"} />
-        <Container className="d-flex justify-content-evenly">
-          {cards.map(({ title, text }) => {
+        <Row>
+          {cards.map(({ id, title, text }) => {
             return (
-              <Card
-                className="object-fit-cover my-2"
-                style={{
-                  width: "20rem",
-                  background: "var(--bs-tertiary-color)",
-                }}
-              >
-                <Card.Img variant="top" src={Logo} />
-                <Card.Body>
-                  <Card.Title>{title}</Card.Title>
-                  <Card.Text>{text}</Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
+              <Col key={id}>
+                <Card
+                  className="object-fit-cover my-2 mx-auto"
+                  style={{
+                    width: "20rem",
+                    background: "var(--bs-tertiary-color)",
+                  }}
+                >
+                  <Card.Img variant="top" src={Logo} />
+                  <Card.Body>
+                    <Card.Title>{title}</Card.Title>
+                    <Card.Text>{text}</Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
             );
           })}
-        </Container>
+        </Row>
         <Container className="d-flex justify-content-center">
           <Title size={"h2"} text={"Carousel"} />
         </Container>
