@@ -13,6 +13,7 @@ const StyledDiv = styled.div`
   line-height: 0;
   font-size: 2.25rem;
   margin: 0 1rem;
+  z-index: 2;
   color: ${({ theme }) =>
     theme.name === "light" ? "var(--bs-dark)" : "var(--bs-light)"};
 
