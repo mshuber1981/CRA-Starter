@@ -3,7 +3,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 // State
 import { useDispatch, useSelector } from "react-redux";
-import { selectMode, setMode } from "./appSlice";
+import { selectMode, setMode } from "./app/appSlice";
 // Router
 import { HashRouter, Routes, Route } from "react-router-dom";
 // Pages

@@ -4,7 +4,7 @@ import styled from "styled-components";
 // State
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { selectMode } from "../appSlice";
+import { selectMode } from "../app/appSlice";
 // Icons
 import { Icon } from "@iconify/react";
 

@@ -1,7 +1,7 @@
 // https://redux-toolkit.js.org/rtk-query/overview
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Config
-import { gitHubUsername } from "./config";
+import { gitHubUsername } from "../config";
 
 export const apiSlice = createApi({
   reducerPath: "api",

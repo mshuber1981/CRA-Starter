@@ -1,6 +1,6 @@
 import React from "react";
 // State
-import { useGetUsersQuery } from "../apiSlice";
+import { useGetUsersQuery } from "../app/apiSlice";
 // Icons
 import { Icon } from "@iconify/react";
 // Components
