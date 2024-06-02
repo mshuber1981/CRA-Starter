@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import "./custom.scss";
 // State
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { store } from "./app/store";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
